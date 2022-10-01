@@ -1,37 +1,70 @@
-const axios = require("axios").default;
-const API_KEY = process.env.API_KEY
+import { initializeApp } from "firebase/app";
+import { 
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    updateProfile
+ } from "firebase/auth";
 
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
+const firebaseConfig = process.env.FIREBASE_CONFIG
 
-export function signup(email,password){
-    const signupURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
-    const data = {
-        email: "email",
-        password: "password",
-        returnSecureToken: true
-    }
-    
-    axios.post(firebaseAuthURL, data)
-    .then( res => {
-        return (res['data']['idToken'], res['data']['refreshToken'])
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
+async function updateUserProfile(displayName, photoURL){
+  var newDetails = {}
+  if(displayName != null) newDetails["displayName"] = displayName;
+  if(photoURL != null) newDetails["photoURL"] = photoURL;
+
+  try{
+    const res = await updateProfile(auth.currentUser, newDetails);
+    return res; 
+  } catch (err){
+    console.log(err)
+  }
 }
 
-export function signin(email, password){
-    const signinURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
-    const data = {
-                email: email,
-                password: password,
-                returnSecureToken: true
-    };
-    axios.post(signinURL,data)
-    .then((res) => {
-        return (res['data']['idToken'], res['data']['refreshToken'])
-    })
+
+export async function signup(email, password, displayName, photoURL){
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    const newUserCredential = await updateUserProfile(displayName, photoURL);
+    const loggedInUser =  await login(email, password);
+    return loggedInUser;
+  } catch (err) {
+    console.log(err.message)
+    return null;
+  }
+}
+
+export async function login(email, password){
+  try{
+    const creds = await signInWithEmailAndPassword(auth, email, password)
+    const user = creds.user['displayName']
+    return user;
+  } catch(e){
+    console.log(e.message);
+    return null;
+  }
 }
 
 
+export  function getUserData(){
+  return  auth.currentUser;
+}
 
-
+export function logout(){
+    signOut(auth)
+    .then(() => {
+      console.log("Logged Out")
+    }).catch((error) => {
+      return error;
+    });
+}
