@@ -52,7 +52,9 @@ export default function CreateAccount() {
         shortRole = "DO/"
         break;
     }
-    console.log(shortRole+name);
+    console.log(email)
+    console.log(password)
+    console.log(shortRole+name)
     
     const user = await signup(email, password, shortRole+name)
     if(user == null) console.log("Sign Up Failed!");

@@ -3,8 +3,8 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+    signOut,
+    updateProfile
  } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -18,7 +18,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 async function updateUserProfile(displayName, photoURL){
-
   var newDetails = {}
   if(displayName != null) newDetails["displayName"] = displayName;
   if(photoURL != null) newDetails["photoURL"] = photoURL;
@@ -27,7 +26,7 @@ async function updateUserProfile(displayName, photoURL){
     const res = await updateProfile(auth.currentUser, newDetails);
     return res; 
   } catch (err){
-    console.log("Profile Err")
+    console.log(err)
   }
 }
 
@@ -55,6 +54,7 @@ export async function login(email, password){
     return null;
   }
 }
+
 
 export  function getUserData(){
   return  auth.currentUser;
