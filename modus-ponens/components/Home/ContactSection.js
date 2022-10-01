@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import MaxRow from "../Container/MaxRow";
 import TextField from "../Account/TextField";
 import HeroButton from "./HeroButton";
+import emailjs from "@emailjs/browser";
 
 const LeftChild = () => {
   return (
@@ -51,8 +52,34 @@ const RightChild = () => {
   const [email, setEmail] = useState("");
   const [theme, setTheme] = useState("");
   const [message, setMessage] = useState("");
+  const [emailStatus, setEmailStatus] = useState("");
+
+  const form = useRef();
+
+  const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
+  const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+  const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
+
+  const sendEmailHandler = async (e) => {
+    e.preventDefault();
+    setName("");
+    setEmail("");
+    setTheme("");
+    setMessage("");
+    try {
+      if (serviceId && templateId && publicKey) {
+        const result = await emailjs.sendForm(serviceId, templateId, form.current, publicKey);
+        setEmailStatus("Email Successfully Sent!");
+      } else {
+        setEmailStatus("Email Service not defined.");
+      }
+    } catch (error) {
+      setEmailStatus("Email Service not defined.");
+    }
+  }
+
   return (
-    <div className="w-full">
+    <form className="w-full pt-5" onSubmit={sendEmailHandler} ref={form}>
       <div className="flex justify-between">
         <TextField
           header="Name"
@@ -85,10 +112,12 @@ const RightChild = () => {
         value={message}
         setValue={setMessage}
       />
-      <div className="flex flex-row-reverse">
-        <HeroButton text="Send" onclick={() => {}} />
+      <div className="flex flex-row-reverse justify-between items-center">
+        <HeroButton text="Send" type="submit" /> 
+        <p>{emailStatus}</p>
+        {/* // onclick={() => {}} */}
       </div>
-    </div>
+    </form>
   );
 };
 
@@ -96,7 +125,7 @@ export default function ContactInformation() {
   return (
     <div className="flex justify-center">
       <div className="w-[1280px] my-10">
-        <MaxRow leftChild={<LeftChild />} rightChild={<RightChild />} />
+        <MaxRow leftChild={<LeftChild />} rightChild={<RightChild />} leftAlign="start" />
       </div>
     </div>
   );

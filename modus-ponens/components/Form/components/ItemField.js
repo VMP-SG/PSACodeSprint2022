@@ -1,4 +1,4 @@
-import Button from "../../Button/Button";
+import BlueButton from "../../Button/BlueButton";
 import CategoryHeader from "./CategoryHeader";
 import InputField from "./InputField";
 import QuantityField from "./Items/QuantityField";
@@ -13,11 +13,15 @@ const ItemField = ({
   addAdditionalItems,
   images,
   setImages,
+  isDisabled,
 }) => {
   var rows = [],
     i = 0,
-    len = (Object.keys(formData).length - 11) / 2;
+    len = !isDisabled
+      ? (Object.keys(formData).length - 11) / 2
+      : (Object.keys(formData).length - 11) / 3;
   while (i++ < len) rows.push(i);
+
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.map((file) => {
       const reader = new FileReader();
@@ -31,6 +35,7 @@ const ItemField = ({
       return file;
     });
   }, []);
+
   return (
     <>
       <CategoryHeader>Items to be declared</CategoryHeader>
@@ -45,6 +50,7 @@ const ItemField = ({
                 onChange={onChange}
                 formData={formData}
                 errorState={errorState}
+                isDisabled={isDisabled}
               />
               <QuantityField
                 name={`quantity_${idx - 1}`}
@@ -52,26 +58,32 @@ const ItemField = ({
                 onChange={onChange}
                 formData={formData}
                 errorState={errorState}
+                isDisabled={isDisabled}
               />
             </div>
             <div className="col-span-1 flex flex-col justify-end">
-              <DropZone
-                onDrop={onDrop}
-                accept={"image/*"}
-                image={images ? images[idx - 1] : ""}
-              />
+              {!isDisabled && (
+                <DropZone
+                  onDrop={onDrop}
+                  accept={"image/*"}
+                  image={images ? images[idx - 1] : ""}
+                />
+              )}
+              {isDisabled && <img src={formData[`image_${idx-1}`]} />}
             </div>
           </div>
         );
       })}
-      <SpacedText styles={"col-span-2"}>
-        <Button
-          onClick={addAdditionalItems}
-          styles="px-5 py-2 bg-blue-link text-white"
-        >
-          Add Additional Items
-        </Button>
-      </SpacedText>
+      {!isDisabled && (
+        <SpacedText styles={"col-span-2"}>
+          <BlueButton
+            onClick={addAdditionalItems}
+            styles="px-5 py-2 bg-blue-link text-white"
+          >
+            Add Additional Items
+          </BlueButton>
+        </SpacedText>
+      )}
     </>
   );
 };

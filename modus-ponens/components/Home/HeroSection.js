@@ -4,8 +4,8 @@ import MaxRow from "../Container/MaxRow";
 
 const LeftChild = () => {
   return (
-    <div className="pr-16">
-      <div className="font-semibold text-5xl pb-5">
+    <div className="pr">
+      <div className="font-semibold text-5xl pb-5 leading-[60px]">
         Secure your Pass Out Notes with ModusPonens
       </div>
       <div className="font-thin text-lg text-grey-main my-5">
@@ -33,7 +33,7 @@ const RightChild = () => {
 export default function HeroSection() {
   return (
     <div className="flex justify-center">
-      <div className="w-[1280px]">
+      <div className="w-[1280px] pl-[55px] my-[60px]">
         <MaxRow leftChild={<LeftChild />} rightChild={<RightChild />} />
       </div>
     </div>

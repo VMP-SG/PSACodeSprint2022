@@ -2,8 +2,16 @@ import React from 'react'
 import ReactPortal from '../Requests/ReactPortal';
 import { Transition } from "@headlessui/react";
 import Close from "../../assets/Close.svg";
+import BlueBorderedButton from "../Button/BlueBorderedButton";
+import BlueButton from "../Button/BlueButton";
 
-const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickButton }) => {
+const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickButton, borderButtonText, blueButtonText }) => {
+
+  const onClickBlueButton = () => {
+    onClickButton();
+    onClose();
+  }
+
   return (
     <ReactPortal wrapperId="modal">
       <Transition
@@ -16,7 +24,7 @@ const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickB
         leaveTo="opacity-0 inset-0 z-50 bg-black bg-opacity-40 fixed flex justify-center items-center font-primary"
       >
         <div className={`${className}`}>
-          <div className="w-[500.33px] bg-white shadow-md rounded-[13.33px] py-[50px] px-[50px]">
+          <div className="w-[350px] bg-white shadow-md rounded-[13.33px] py-[30px] px-[35px]">
             <div className="flex justify-center w-full relative">
               <p className="text-blue-dark text-[24px] font-bold leading-[32.78px]">
                 {headingText}
@@ -32,6 +40,10 @@ const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickB
             </div>
             <div className="my-[30px] text-center font-secondary text-[16px]">
               {bodyText}
+            </div>
+            <div className="flex justify-between">
+              <BlueBorderedButton onClick={onClose}>{borderButtonText}</BlueBorderedButton>
+              <BlueButton onClick={onClickBlueButton}>{blueButtonText}</BlueButton>
             </div>
           </div>
         </div>

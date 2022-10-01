@@ -15,6 +15,7 @@ import { getRoleAndName, truncateName } from "../../utils/strings";
 const MainHeader = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
+  console.log(currentRoute);
 
   const [user, setUser] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -47,13 +48,15 @@ const MainHeader = () => {
           </Link>
         </div>
 
-        <div class="nav-items flex-grow items-start pl-24">
+        <div className="nav-items flex-grow items-start pl-24">
           <ul className="nav-list flex text-white">
             <Link href="/">
               <li
                 className={
-                  "nav-items mx-5 border-b-2 border-b-transparent hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                  (currentRoute == "/" ? " border-b-2 border-white" : "")
+                  "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                  (currentRoute == "/"
+                    ? " border-white"
+                    : " border-b-transparent")
                 }
               >
                 Home
@@ -65,10 +68,10 @@ const MainHeader = () => {
                 <Link href="/tasks">
                   <li
                     className={
-                      "nav-items mx-5 border-b-2 border-b-transparent hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                      "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
                       (currentRoute == "/tasks"
-                        ? " border-b-2 border-white"
-                        : "")
+                        ? " border-white"
+                        : " border-b-transparent")
                     }
                   >
                     Tasks
@@ -78,10 +81,10 @@ const MainHeader = () => {
                 <Link href="/createRequest">
                   <li
                     className={
-                      "nav-items mx-5 border-b-2 border-b-transparent hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                      "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
                       (currentRoute == "/createRequest"
-                        ? " border-b-2 border-white"
-                        : "")
+                        ? " border-white"
+                        : " border-b-transparent")
                     }
                   >
                     Create
@@ -91,10 +94,10 @@ const MainHeader = () => {
                 <Link href="/myRequests">
                   <li
                     className={
-                      "nav-items mx-5 border-b-2 border-b-transparent hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                      "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
                       (currentRoute == "/myRequests"
-                        ? " border-b-2 border-white"
-                        : "")
+                        ? " border-white"
+                        : " border-b-transparent")
                     }
                   >
                     My Requests
@@ -103,18 +106,18 @@ const MainHeader = () => {
               </div>
             )}
 
-            <Link href="/pageGuide">
+            <a href="https://github.com/ReallyEnthusiasticProgrammersDLW2022/Backend" target="_blank" rel="noreferrer noopener">
               <li
                 className={
-                  "nav-items mx-5 border-b-2 border-b-transparent hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                  "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
                   (currentRoute == "/pageGuide"
-                    ? " border-b-2 border-white"
-                    : "")
+                    ? " border-white"
+                    : " border-b-transparent")
                 }
               >
                 How It Works
               </li>
-            </Link>
+            </a>
           </ul>
         </div>
 
@@ -141,6 +144,8 @@ const MainHeader = () => {
         headingText="Logout"
         bodyText="Are you sure that you want to logout?"
         onClickButton={logout}
+        blueButtonText="Logout"
+        borderButtonText="Cancel"
       />
     </nav>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import AETOSApproval from "../../../components/ApprovePages/AETOSApproval";
 import HeroHeader from "../../../components/Layout/HeroHeader";

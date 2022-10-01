@@ -19,7 +19,6 @@ export default function TextField({
         placeholder={placeholder}
         onChange={(e) => {
           setValue(e.target.value);
-          console.log(value);
         }}
       />
     </div>

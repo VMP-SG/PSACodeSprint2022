@@ -1,8 +1,10 @@
-const { default: DO } = require("../../components/Dashboard/DO")
+import CounterSigningOfficer from "../../components/Dashboard/CounterSigningOfficer"
+import DO from "../../components/Dashboard/DO"
 
 const DisplayForm = () => {
     return (
-        <DO id={"-NDILw4H8t5xhhU6dF8v"}/>
+        // <DO user={"0001"} id={"-NDIuqp5WGsgVjlZy8XK"}/>
+        <CounterSigningOfficer user={"0001"} id={"-NDIuqp5WGsgVjlZy8XK"}/>
     )
 }
 
