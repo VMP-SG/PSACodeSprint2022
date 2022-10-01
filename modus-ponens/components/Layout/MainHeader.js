@@ -10,6 +10,8 @@ import LogoutModal from '../Account/LogoutModal';
 // import { getUserData } from "../../api/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+import { getRoleAndName, truncateName } from '../../utils/strings';
+
 const MainHeader = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -27,8 +29,9 @@ const MainHeader = () => {
     onAuthStateChanged(auth, user => {
       setUser(user);
       if (user) {
-        const name = user.displayName.split("/")[1];
-        setDisplayName(name.length > 7 ? `${name.substring(0,7)}...` : name);
+        const [role, name] = getRoleAndName(user.displayName);
+        const truncatedName = truncateName(name);
+        setDisplayName(truncatedName);
       } else {
         setDisplayName("Login");
       }
@@ -115,12 +118,18 @@ const MainHeader = () => {
         </ul>
         </div>
 
+        {user ?
+        <button className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer" onClick={() => setOpenLogoutModal(true)}>
+          <Image src={LoginIcon} />
+          <span className="ml-3">{displayName}</span>
+        </button> :
         <Link href="/account/login"> 
           <div className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer">
             <Image src={LoginIcon} />
             <span className="ml-3">{displayName}</span>
           </div>
         </Link>
+        }
       </div>
       <LogoutModal open={openLogoutModal} onClose={() => setOpenLogoutModal(false)} headingText="Logout" />
     </nav>
