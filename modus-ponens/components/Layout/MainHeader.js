@@ -48,7 +48,7 @@ const MainHeader = () => {
           </Link>
         </div>
 
-        <div class="nav-items flex-grow items-start pl-24">
+        <div className="nav-items flex-grow items-start pl-24">
           <ul className="nav-list flex text-white">
             <Link href="/">
               <li
