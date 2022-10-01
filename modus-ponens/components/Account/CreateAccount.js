@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AccountPage from "./AccountPage";
 import FormExterior from "./FormExterior";
 import AccountButton from "./AccountButton";
 import TextField from "./TextField";
+import { useRouter } from "next/router";
 
 const Dropdown = ({ options, value, setValue }) => {
   return (
@@ -26,11 +27,15 @@ const Dropdown = ({ options, value, setValue }) => {
 };
 
 export default function CreateAccount() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("PSA Staff");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = (link) => {
+    router.push(link);
+  };
   const roles = ["PSA Staff", "AETOS Staff", "Designated Officer"];
   return (
     <AccountPage>
@@ -67,7 +72,13 @@ export default function CreateAccount() {
           />
         </div>
         <div className="flex justify-between relative">
-          <AccountButton text={"Cancel"} type={2} onclick={() => {}} />
+          <AccountButton
+            text={"Cancel"}
+            type={2}
+            onclick={() => {
+              navigate("/account/login");
+            }}
+          />
           <AccountButton text={"Create Account"} type={1} onclick={() => {}} />
         </div>
       </FormExterior>
