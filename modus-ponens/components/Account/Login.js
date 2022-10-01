@@ -6,7 +6,7 @@ import MPLogo from "../../assets/MPLogo.png";
 import TextField from "./TextField";
 import { useRouter } from "next/router";
 
-import {login} from "../../api/auth"
+import { login } from "../../api/auth"
 
 export default function Login() {
   const router = useRouter();

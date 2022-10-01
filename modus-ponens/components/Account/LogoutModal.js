@@ -3,7 +3,7 @@ import ReactPortal from '../Requests/ReactPortal';
 import { Transition } from "@headlessui/react";
 import Close from "../../assets/Close.svg";
 
-const LogoutModal = ({ open, headingText, onClose, className }) => {
+const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickButton }) => {
   return (
     <ReactPortal wrapperId="modal">
       <Transition
@@ -30,8 +30,8 @@ const LogoutModal = ({ open, headingText, onClose, className }) => {
                 />
               )}
             </div>
-            <div>
-              Are you sure that you want to logout?
+            <div className="my-[30px] text-center font-secondary text-[16px]">
+              {bodyText}
             </div>
           </div>
         </div>
