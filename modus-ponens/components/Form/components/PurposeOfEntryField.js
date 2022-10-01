@@ -1,7 +1,7 @@
 import CategoryHeader from "./CategoryHeader";
 import InputField from "./InputField";
 
-const PurposeOfEntryField = ({ onChange, formData, errorState }) => {
+const PurposeOfEntryField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
       <CategoryHeader>Purpose of entry</CategoryHeader>
@@ -12,6 +12,7 @@ const PurposeOfEntryField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Additional Details"}
@@ -20,6 +21,7 @@ const PurposeOfEntryField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
     </>
   );

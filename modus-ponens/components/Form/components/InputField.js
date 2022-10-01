@@ -7,12 +7,13 @@ const InputField = ({
   onChange,
   formData,
   errorState,
+  isDisabled=false,
 }) => {
   return (
     <SpacedText styles={`flex flex-col col-span-${span}`}>
       <label className="text-card-body text-slate-400">
         {title}
-        {name in errorState ? "*" : ""}
+        {!isDisabled && name in errorState ? "*" : ""}
       </label>
       <input
         type="text"
@@ -20,10 +21,11 @@ const InputField = ({
         value={formData[name]}
         onChange={onChange}
         className={`text-black bg-slate-50 mt-5 ${
-          errorState[name] ? "border-2 border-red-700" : "border-b border-black"
+          !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
         }`}
+        disabled={isDisabled}
       />
-      {errorState[name] && <p>Field cannot be empty!</p>}
+      {!isDisabled && errorState[name] && <p>Field cannot be empty!</p>}
     </SpacedText>
   );
 };

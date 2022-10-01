@@ -1,7 +1,7 @@
 import CategoryHeader from "./CategoryHeader";
 import InputField from "./InputField";
 
-const DriverField = ({ onChange, formData, errorState }) => {
+const DriverField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
       <CategoryHeader>Driver Details</CategoryHeader>
@@ -12,6 +12,7 @@ const DriverField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Last Name"}
@@ -20,6 +21,7 @@ const DriverField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Pass Number"}
@@ -28,6 +30,7 @@ const DriverField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Vehicle Number"}
@@ -36,6 +39,7 @@ const DriverField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
     </>
   );
