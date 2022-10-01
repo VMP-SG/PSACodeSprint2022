@@ -17,32 +17,32 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-function updateUserProfile(displayName, photoURL){
+async function updateUserProfile(displayName, photoURL){
+
   var newDetails = {}
   if(displayName != null) newDetails["displayName"] = displayName;
   if(photoURL != null) newDetails["photoURL"] = photoURL;
 
-  updateProfile(auth.currentUser, newDetails)
-  .then((res) => {
-      console.log(res);
-      return res;
-  }).catch((error) => {
-      console.log(error);
-  });
+  try{
+    const res = await updateProfile(auth.currentUser, newDetails);
+    return res; 
+  } catch (err){
+    console.log("Profile Err")
+  }
 }
 
-export function signup(email, password, displayName, photoURL){
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-      const user = userCredential.user;
-      updateUserProfile(displayName, photoURL)
-  })
-  .then(()=>{login(email, password)})
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    return errorMessage;
-});
+
+export async function signup(email, password, displayName, photoURL){
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    const newUserCredential = await updateUserProfile(displayName, photoURL);
+    const loggedInUser =  await login(email, password);
+    return loggedInUser;
+  } catch (err) {
+    console.log(err.message)
+    return null;
+  }
 }
 
 export async function login(email, password){
@@ -57,14 +57,6 @@ export async function login(email, password){
 }
 
 export  function getUserData(){
-  // onAuthStateChanged(auth, (user) => {
-  //     if (user) {    
-  //       return user['displayName']
-  //     } else {
-  //       console.log("null")
-  //       return null; 
-  //     }
-  //   });
   return  auth.currentUser;
 }
 

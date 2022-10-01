@@ -19,7 +19,9 @@ const MainFooter = () => {
   useEffect( () => {
     setUser(getUserData);
     if(user == null) console.log("NOT LOGGED IN")
-    else console.log("username: "+ user['displayName']);
+    else {
+      console.log("email: "+ user['email'])
+      console.log("username: "+ user['displayName'])};
   })
 
   return (
@@ -76,7 +78,7 @@ const MainFooter = () => {
           {user != null && <div className="mx-5">
             <span className="text-primary m-5 text-white">My Account</span>
             <ul className="nav-list text-grey-main">
-              <Link href="/Login">
+              <Link href="/account/login">
                 <li onClick={logout} className="nav-items text-xs m-5 cursor-pointer hover:underline">
                   Logout
                 </li>

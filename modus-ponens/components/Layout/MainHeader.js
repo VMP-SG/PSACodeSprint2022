@@ -13,12 +13,11 @@ const MainHeader = () => {
   const currentRoute = router.pathname;
   console.log(currentRoute);
 
+
   const [user, setUser] = useState("")
 
   useEffect( () => {
     setUser(getUserData);
-    if(user == null) console.log("NOT LOGGED IN")
-    else console.log("username: "+ user['displayName']);
   })
 
 
@@ -102,12 +101,12 @@ const MainHeader = () => {
         </ul>
         </div>
 
-        <Link href="/account/login">
+        {currentRoute != "/account/login" && <Link href="/account/login">
           <div className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer">
             <Image src={LoginIcon} />
             <span className="ml-3">Login</span>
           </div>
-        </Link>
+        </Link>}
       </div>
    
       
