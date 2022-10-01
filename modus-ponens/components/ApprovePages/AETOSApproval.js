@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import MaxRow from "../Container/MaxRow";
 import FormExterior from "../Requests/FormExterior";
 import UneditableTextField from "../Requests/UneditableTextField";
 import TextFieldHeaders from "../Requests/TextFieldHeaders";
-import FullWidthButton from "../Requests/FullWidthButton";
 import ApproveModal from "./ApproveModal";
-import getPONData from "../../api/getPONData";
 import ItemImage from "./ItemImage";
+import getPONData from "../../api/getPONData";
+import updateStatus from "../../api/updateStatus";
+import BlueBorderedButton from "../Button/BlueBorderedButton";
+import RedButton from "../Button/RedButton";
+import GreenButton from "../Button/GreenButton";
 
 const RequestLeft = ({ data }) => {
   return (
@@ -31,7 +36,7 @@ const RequestLeft = ({ data }) => {
       <UneditableTextField
         header={"Identification Number"}
         type={"text"}
-        value={data.id}
+        value={data.requestorID}
       />
       <TextFieldHeaders title={"Purpose of Entry"} />
       <UneditableTextField
@@ -53,7 +58,7 @@ const RequestLeft = ({ data }) => {
       <UneditableTextField
         header={"Pass Number"}
         type={"text"}
-        value={data.passNumber}
+        value={data.driverPassNumber}
       />
       <UneditableTextField
         header={"Vehicle Number"}
@@ -68,28 +73,29 @@ const RequestRight = ({ data }) => {
   return (
     <div className="w-full px-5">
       <TextFieldHeaders title={"Items to be declared"} />
-      <UneditableTextField
-        header={"Item 1 Description"}
-        type={"text"}
-        value={data.description_0}
-      />
-      <UneditableTextField
-        header={"Quantity"}
-        type={"text"}
-        value={data.quantity_0}
-      />
-      <ItemImage src={data.image_0} />
-      <UneditableTextField
-        header={"Item 2 Description"}
-        type={"text"}
-        value={"Toilet paper"}
-      />
-      <UneditableTextField header={"Quantity"} type={"text"} value={"100"} />
+      {Object.values(data.items).map((item, index) => {
+        return (
+          <>
+            <UneditableTextField
+              header={`Item ${index + 1} Description`}
+              type={"text"}
+              value={item.description}
+            />
+            <UneditableTextField
+              header={"Quantity"}
+              type={"text"}
+              value={item.quantity}
+            />
+            <ItemImage src={item.image} />
+          </>
+        );
+      })}
     </div>
   );
 };
 
-export default function AETOSApproval({ id }) {
+export default function AETOSApproval({ user, id }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
   useEffect(() => {
@@ -97,6 +103,12 @@ export default function AETOSApproval({ id }) {
       setData(res.data);
     });
   }, [id]);
+  const handleDeny = () => {
+    updateStatus(id, 6).then(router.push(`/dashboard/${user}`));
+  };
+  const handleApprove = () => {
+    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+  };
   return data?.additionalDetails ? (
     <div className="py-10">
       <FormExterior>
@@ -108,14 +120,19 @@ export default function AETOSApproval({ id }) {
           rightAlign="start"
         />
         <div>
-          <FullWidthButton text={"Back"} type={2} onClick={() => {}} />
-          <FullWidthButton
-            text={"Approve"}
-            type={1}
-            onClick={() => {
-              setOpen(true);
-            }}
-          />
+          <div className="flex justify-between">
+            <Link href={`/`}>
+              <BlueBorderedButton>Cancel</BlueBorderedButton>
+            </Link>
+            <RedButton onClick={handleDeny}>Deny</RedButton>
+            <GreenButton
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              Approve
+            </GreenButton>
+          </div>
         </div>
       </FormExterior>
       <ApproveModal
@@ -125,6 +142,7 @@ export default function AETOSApproval({ id }) {
         }}
         headingText={"Approve Request"}
         bodyText={"Are you sure you want to approve the request?"}
+        onClickButton={handleApprove}
       />
     </div>
   ) : (

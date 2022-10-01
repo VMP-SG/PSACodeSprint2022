@@ -33,7 +33,7 @@ const RequestLeft = ({ data }) => {
       <UneditableTextField
         header={"Identification Number"}
         type={"text"}
-        value={data.id}
+        value={data.requestorID}
       />
       <TextFieldHeaders title={"Purpose of Entry"} />
       <UneditableTextField
@@ -55,7 +55,7 @@ const RequestLeft = ({ data }) => {
       <UneditableTextField
         header={"Pass Number"}
         type={"text"}
-        value={data.passNumber}
+        value={data.driverPassNumber}
       />
       <UneditableTextField
         header={"Vehicle Number"}
@@ -69,25 +69,23 @@ const RequestRight = ({ data }) => {
   return (
     <div className="w-full px-5">
       <TextFieldHeaders title={"Items to be declared"} />
-      <UneditableTextField
-        header={"Item 1 Description"}
-        type={"text"}
-        value={data.description_0}
-      />
-      <UneditableTextField
-        header={"Quantity"}
-        type={"text"}
-        value={data.quantity_0}
-      />
-      <ItemImage src={data.image_0} />
-      <UneditableTextField
-        header={"Item 2 Description"}
-        type={"text"}
-        value={"Toilet paper"}
-      />
-      <UneditableTextField header={"Quantity"} type={"text"} value={"100"} />
-      <TextFieldHeaders title={"Status"} />
-      <StatusSection status={data.status} />
+      {Object.values(data.items).map((item, index) => {
+        return (
+          <>
+            <UneditableTextField
+              header={`Item ${index + 1} Description`}
+              type={"text"}
+              value={item.description}
+            />
+            <UneditableTextField
+              header={"Quantity"}
+              type={"text"}
+              value={item.quantity}
+            />
+            <ItemImage src={item.image} />
+          </>
+        );
+      })}
     </div>
   );
 };
@@ -112,13 +110,15 @@ export default function ViewRequest({ id }) {
         />
         <div>
           <FullWidthButton text={"Back"} type={2} onClick={() => {}} />
-          <FullWidthButton
-            text={"Generate QR Code"}
-            type={1}
-            onClick={() => {
-              setOpen(true);
-            }}
-          />
+          {data?.status == 3 ? (
+            <FullWidthButton
+              text={"Generate QR Code"}
+              type={1}
+              onClick={() => {
+                setOpen(true);
+              }}
+            />
+          ) : null}
         </div>
       </FormExterior>
       <QRModal

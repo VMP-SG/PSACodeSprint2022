@@ -19,7 +19,6 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
 
   useEffect(() => {
     getPONData(id).then(({ data }) => {
-      console.log(data);
       setFormData(data);
     });
   }, []);
@@ -55,15 +54,14 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
         </div>
         <ItemField formData={formData} isDisabled={true} />
         <SpacedText styles={`flex justify-between`}>
-        <Link href={`/dashboard/${user}`}>
-          <BlueBorderedButton>Cancel</BlueBorderedButton>
-        </Link>
-        <div/>
-        <RedButton onClick={handleDeny}>Deny</RedButton>
-        <GreenButton onClick={handleApprove}>Approve</GreenButton>
-      </SpacedText>
+          <Link href={`/dashboard/${user}`}>
+            <BlueBorderedButton>Cancel</BlueBorderedButton>
+          </Link>
+          <div />
+          <RedButton onClick={handleDeny}>Deny</RedButton>
+          <GreenButton onClick={handleApprove}>Approve</GreenButton>
+        </SpacedText>
       </ComponentContainer>
-      
     </div>
   );
 };

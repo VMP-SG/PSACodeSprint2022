@@ -44,7 +44,7 @@ const ApproveModal = ({
             </div>
             <div className="flex justify-around">
               <BlueBorderedButton onClick={onClose}>Cancel</BlueBorderedButton>
-              <BlueButton>Approve</BlueButton>
+              <BlueButton onClick={onClickButton}>Approve</BlueButton>
             </div>
           </div>
         </div>
