@@ -14,8 +14,8 @@ module.exports = {
       fontSize: {
         title: "2.875rem",
         subtitle: "1rem",
-        "card-header": "2.375rem",
-        "card-body": "1.875rem",
+        "card-header": "2rem",
+        "card-body": "1.5rem",
       },
       fontFamily: {
         primary: ["Manrope", "Helvetica", "Arial"],

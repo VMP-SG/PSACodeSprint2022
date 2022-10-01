@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import getPONData from "../api/getPONData";
+import React from "react";
 import RequestForm from "../components/Form/RequestForm";
 import QueryRequest from "../components/test/QueryRequest";
-import updateStatus from "../api/updateStatus";
 import DashBoard from "./dashboard/[id]";
 
 export default function Home() {
