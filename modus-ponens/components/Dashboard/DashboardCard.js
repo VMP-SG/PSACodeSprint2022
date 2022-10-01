@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
-import FramerMotion from "../../components/FramerMotion/FramerMotion";
-import TwoLinesText from "../../components/Text/TwoLinesText";
+import FramerMotion from "../FramerMotion/FramerMotion";
+import TwoLinesText from "../Text/TwoLinesText";
 
 const DashBoardCard = ({
   company,

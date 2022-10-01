@@ -3,8 +3,8 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+    signOut,
+    updateProfile
  } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -17,57 +17,53 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-function updateUserProfile(displayName, photoURL){
+async function updateUserProfile(displayName, photoURL){
   var newDetails = {}
   if(displayName != null) newDetails["displayName"] = displayName;
   if(photoURL != null) newDetails["photoURL"] = photoURL;
 
-  updateProfile(auth.currentUser, newDetails)
-  .then((res) => {
-      console.log(res);
-      return res;
-  }).catch((error) => {
-      console.log(error);
-  });
+  try{
+    const res = await updateProfile(auth.currentUser, newDetails);
+    return res; 
+  } catch (err){
+    console.log(err)
+  }
 }
 
-export function signup(email, password, displayName, photoURL){
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-      const user = userCredential.user;
-      updateUserProfile(displayName, photoURL)
-  })
-  .then(()=>{login(email, password)})
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    return errorMessage;
-});
+
+export async function signup(email, password, displayName, photoURL){
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    const newUserCredential = await updateUserProfile(displayName, photoURL);
+    const loggedInUser =  await login(email, password);
+    return loggedInUser;
+  } catch (err) {
+    console.log(err.message)
+    return null;
+  }
 }
 
-export function login(email, password){
-  signInWithEmailAndPassword(auth, email, password)
-  .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage)
-  });
+export async function login(email, password){
+  try{
+    const creds = await signInWithEmailAndPassword(auth, email, password)
+    const user = creds.user['displayName']
+    return user;
+  } catch(e){
+    console.log(e.message);
+    return null;
+  }
 }
 
-export function getUserData(){
-  onAuthStateChanged(auth, (user) => {
-      if (user) {    
-        return user['displayName']
-      } else {
-          return null; 
-      }
-    });
+
+export  function getUserData(){
+  return  auth.currentUser;
 }
 
 export function logout(){
-    signOut(auth).then(() => {
-      console.log("SignedOut")
-      return signout; 
+    signOut(auth)
+    .then(() => {
+      console.log("Logged Out")
     }).catch((error) => {
       return error;
     });

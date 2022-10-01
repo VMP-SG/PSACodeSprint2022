@@ -1,5 +1,5 @@
-const Ctext = ({ children, styles }) => {
-    return <div className={`text-center font-primary ${styles}`}>
+const Ctext = ({ children, styles, onClick }) => {
+    return <div className={`text-center font-primary ${styles}`} onClick={onClick}>
         {children}
     </div>
 }

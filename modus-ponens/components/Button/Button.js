@@ -1,13 +1,14 @@
-import Ctext from "../Text/Ctext"
+import Ctext from "../Text/Ctext";
 
-const Button = ({ children, borderColor, bgColor, textColor, onClick }) => {
-    return (
-        <div onClick={onClick} className={`rounded-md bg-${bgColor} ${textColor} ${borderColor ? "border border-" + borderColor : ""}`}>
-            <Ctext>
-                {children}
-            </Ctext>
-        </div>
-    )
-}
+const Button = ({ children, styles, onClick }) => {
+  return (
+    <Ctext
+      onClick={onClick}
+      styles={`my-auto rounded-md cursor-pointer ${styles}`}
+    >
+      {children}
+    </Ctext>
+  );
+};
 
-export default Button
+export default Button;

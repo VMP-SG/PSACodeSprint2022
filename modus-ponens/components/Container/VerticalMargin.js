@@ -1,5 +1,7 @@
-const VerticallySpaced = ({ children, styles }) => {
-  return <div className={`my-3 ${styles}`}>{children}</div>;
-};
+const VerticalMargin = ({ children, styles }) => {
+  return <div className={`py-6 ${styles}`}>
+    {children}
+  </div>
+}
 
-export default VerticallySpaced;
+export default VerticalMargin

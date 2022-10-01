@@ -4,6 +4,7 @@ import FormExterior from "./FormExterior";
 import AccountButton from "./AccountButton";
 import TextField from "./TextField";
 import { useRouter } from "next/router";
+import {signup} from "../../api/auth";
 
 const Dropdown = ({ options, value, setValue }) => {
   return (
@@ -37,10 +38,32 @@ export default function CreateAccount() {
     router.push(link);
   };
   const roles = ["PSA Staff", "AETOS Staff", "Designated Officer"];
+
+  const handleCreateAccount = async () => {
+    const shortRole = "";
+    switch(role){
+      case "PSA Staff":
+        shortRole = "PSA/"
+        break
+      case "AETOS Staff":
+        shortRole = "AETOS/"
+        break;
+      case "Desginated Officer":
+        shortRole = "DO/"
+        break;
+    }
+    console.log(email)
+    console.log(password)
+    console.log(shortRole+name)
+    
+    const user = await signup(email, password, shortRole+name)
+    if(user == null) console.log("Sign Up Failed!");
+    else router.push("/");
+  }
   return (
     <AccountPage>
       <FormExterior>
-        <div>
+        <div className='text-black'>
           <TextField
             header={"Name"}
             type="text"
@@ -79,7 +102,7 @@ export default function CreateAccount() {
               navigate("/account/login");
             }}
           />
-          <AccountButton text={"Create Account"} type={1} onclick={() => {}} />
+          <AccountButton text={"Create Account"} type={1} onclick={handleCreateAccount} />
         </div>
       </FormExterior>
     </AccountPage>
