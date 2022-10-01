@@ -1,10 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/logo.png";
-import LoginIcon from "../../assets/loginIcon.png";
+
 import githubLogo from "../../assets/githubLogo.png";
+import { logout } from "../../api/auth";
+import { useRouter } from "next/router";
+import React, {useEffect, useState} from "react";
+import { getUserData } from "../../api/auth";
 
 const MainFooter = () => {
+
+  const router = useRouter();
+  const currentRoute = router.pathname;
+  console.log(currentRoute);
+
+  const [user, setUser] = useState("")
+
+  useEffect( () => {
+    setUser(getUserData);
+    if(user == null) console.log("NOT LOGGED IN")
+    else console.log("username: "+ user['displayName']);
+  })
+
   return (
     <div className="bg-dark-blue-main margin w-[var(--max-screen-width)] pr-40 pl-40">
       <div className="flex  pt-14 pb-32 items-start">
@@ -29,21 +46,25 @@ const MainFooter = () => {
                   Home
                 </li>
               </Link>
-              <Link href="/tasks">
-                <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
-                  Tasks
-                </li>
-              </Link>
-              <Link href="/createRequest">
-                <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
-                  Create
-                </li>
-              </Link>
-              <Link href="/myRequests">
-                <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
-                  My Requests
-                </li>
-              </Link>
+
+              {user != null && <div>
+                <Link href="/tasks">
+                  <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
+                    Tasks
+                  </li>
+                </Link>
+                <Link href="/createRequest">
+                  <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
+                    Create
+                  </li>
+                </Link>
+                <Link href="/myRequests">
+                  <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
+                    My Requests
+                  </li>
+                </Link>
+              </div>}
+              
               <Link href="/pageGuide">
                 <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
                   How It Works
@@ -51,16 +72,18 @@ const MainFooter = () => {
               </Link>
             </ul>
           </div>
-          <div className="mx-5">
+
+          {user != null && <div className="mx-5">
             <span className="text-primary m-5 text-white">My Account</span>
             <ul className="nav-list text-grey-main">
               <Link href="/Login">
-                <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
+                <li onClick={logout} className="nav-items text-xs m-5 cursor-pointer hover:underline">
                   Logout
                 </li>
               </Link>
             </ul>
-          </div>
+          </div>}
+
         </div>
       </div>
 

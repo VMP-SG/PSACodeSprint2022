@@ -45,29 +45,33 @@ export function signup(email, password, displayName, photoURL){
 });
 }
 
-export function login(email, password){
-  signInWithEmailAndPassword(auth, email, password)
-  .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage)
-  });
+export async function login(email, password){
+  try{
+    const creds = await signInWithEmailAndPassword(auth, email, password)
+    const user = creds.user['displayName']
+    return user;
+  } catch(e){
+    console.log(e.message);
+    return null;
+  }
 }
 
-export function getUserData(){
-  onAuthStateChanged(auth, (user) => {
-      if (user) {    
-        return user['displayName']
-      } else {
-          return null; 
-      }
-    });
+export  function getUserData(){
+  // onAuthStateChanged(auth, (user) => {
+  //     if (user) {    
+  //       return user['displayName']
+  //     } else {
+  //       console.log("null")
+  //       return null; 
+  //     }
+  //   });
+  return  auth.currentUser;
 }
 
 export function logout(){
-    signOut(auth).then(() => {
-      console.log("SignedOut")
-      return signout; 
+    signOut(auth)
+    .then(() => {
+      console.log("Logged Out")
     }).catch((error) => {
       return error;
     });
