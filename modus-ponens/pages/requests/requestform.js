@@ -165,7 +165,7 @@ const RequestForm = () => {
   };
 
   return (
-    <div className="bg-light-blue-0">
+    <div className="bg-light-blue-0 pb-24">
       <DashBoardHeader numItems={6} />
       {activePage === 1 ? (
         <Page2

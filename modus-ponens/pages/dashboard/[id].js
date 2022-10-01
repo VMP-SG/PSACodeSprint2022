@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import DashBoardCard from "./DashboardCard";
-import DashBoardHeader from "./DashboardHeader";
+import DashBoardCard from "../../components/Dashboard/DashboardCard";
+import DashBoardHeader from "../../components/Dashboard/DashboardHeader";
 
 const DashBoard = () => {
   const router = useRouter();

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import RequestForm from "../components/Form/RequestForm";
-import QueryRequest from "../components/test/QueryRequest";
-import DashBoard from "./dashboard/[id]";
+// import RequestForm from "../components/Form/RequestForm";
+// import QueryRequest from "../components/test/QueryRequest";
+// import DashBoard from "./dashboard/[id]";
 
 
 
@@ -14,9 +14,9 @@ export default function Home() {
 
   return (
   <div>
-    <RequestForm />
+    {/* <RequestForm />
     <QueryRequest filterKey={"company"} filter={"asdfasdf"}/>
-    <DashBoard />
+    <DashBoard /> */}
   </div>
   )
 }
