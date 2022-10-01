@@ -70,7 +70,7 @@ const ItemField = ({
                   image={images ? images[idx - 1] : ""}
                 />
               )}
-              {isDisabled && <img src={formData[`image_${idx - 1}`]} />}
+              {isDisabled && <img src={formData.items[`item${idx - 1}`].image} />}
             </div>
           </div>
         );

@@ -1,7 +1,17 @@
 import React from "react";
 
+const statusTypes = {
+  0: [3, 1, 1, 1],
+  1: [3, 2, 1, 1],
+  2: [3, 2, 2, 1],
+  3: [3, 2, 2, 2],
+  4: [3, 4, 4, 4],
+  5: [3, 2, 4, 4],
+  6: [3, 2, 2, 4],
+};
+
 const StatusChip = ({ type }) => {
-  // type == 1: pending, 2: approved, 3: Submitted
+  // type == 1: pending, 2: approved, 3: Submitted, 4: Rejected
   const greyed = {
     background: "#FFFFFF",
     color: "#9597A0",
@@ -14,12 +24,26 @@ const StatusChip = ({ type }) => {
     border: "1px solid",
     fontWeight: 600,
   };
+  const rejected = {
+    background: "#FFFFFF",
+    color: "#C14040",
+    border: "1px solid",
+    fontWeight: 600,
+  };
   return (
     <div
-      style={type === 2 || type === 3 ? primary : greyed}
+      style={
+        type === 2 || type === 3 ? primary : type === 4 ? rejected : greyed
+      }
       className="flex flex-row justify-center items-center w-[70px] m-2 rounded-md text-xs text-grey-main"
     >
-      {type === 1 ? "Pending" : type === 2 ? "Approved" : "Submitted"}
+      {type === 1
+        ? "Pending"
+        : type === 2
+        ? "Approved"
+        : type === 4
+        ? "Rejected"
+        : "Submitted"}
     </div>
   );
 };
@@ -27,12 +51,17 @@ const StatusChip = ({ type }) => {
 const StatusCircle = ({ type, by, text, line }) => {
   const submittedStyle = "bg-blue-link";
   const pendingStyle = "bg-grey-main";
+  const rejectedStyle = "bg-dark-red";
   return (
     <div>
       <div className="flex items-center">
         <div
           className={`w-[30px] h-[30px] my-2 mr-2 rounded-full ${
-            type !== 1 ? submittedStyle : pendingStyle
+            type === 4
+              ? rejectedStyle
+              : type !== 1
+              ? submittedStyle
+              : pendingStyle
           }`}
         />
         <div className={"font-semibold"}>{text}</div>
@@ -49,28 +78,32 @@ const StatusCircle = ({ type, by, text, line }) => {
   );
 };
 
-export default function StatusSection({}) {
+export default function StatusSection({ status }) {
   return (
     <div className="py-5">
       <StatusCircle
-        type={3}
+        type={statusTypes[status][0]}
         text={"Submission of Request"}
         by={"Ivan Loke Zhi Hao"}
         line
       />
       <StatusCircle
-        type={2}
+        type={statusTypes[status][1]}
         text={"Approval by Designated Officer"}
         by={"Koh Ming En"}
         line
       />
       <StatusCircle
-        type={2}
+        type={statusTypes[status][2]}
         text={"Approval by Counter Signing Officer"}
         by={"Chang Dao Zheng"}
         line
       />
-      <StatusCircle type={1} text={"Submission to AETOS"} by={"Ng Ho Chi"} />
+      <StatusCircle
+        type={statusTypes[status][3]}
+        text={"Submission to AETOS"}
+        by={"Ng Ho Chi"}
+      />
     </div>
   );
 }

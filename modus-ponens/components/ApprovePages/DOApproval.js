@@ -15,39 +15,16 @@ import Link from "next/link";
 import updateStatus from "../../api/updateStatus";
 
 const DOApproval = ({ user, id }) => {
-  const [formData, setFormData] = useState({
-    status: 0,
-    company: "",
-    requestorFirstName: "",
-    requestorLastName: "",
-    requestorID: "",
-    mainDescription: "",
-    additionalDetails: "",
-    driverFirstName: "",
-    driverLastName: "",
-    driverPassNumber: "",
-    vehicleNumber: "",
-    items: {
-      item0: {
-        description: "",
-        quantity: "",
-        image: "",
-      },
-    },
-    designatedOfficer: "Koh Ming En",
-    counterSignee: "",
-    approvingAetosOfficer: "",
-  });
+  const [formData, setFormData] = useState({});
   const router = useRouter();
 
   useEffect(() => {
     getPONData(id)
-      .then(({ data }) => {
-        console.log(data);
-        setFormData(data);
+      .then((res) => {
+        setFormData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const handleDeny = () => {
     updateStatus(id, 4).then(router.push(`/dashboard/${user}`));

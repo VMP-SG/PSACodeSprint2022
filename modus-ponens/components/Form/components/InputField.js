@@ -20,7 +20,7 @@ const InputField = ({
       <input
         type="text"
         name={`${name}`}
-        value={!isDisabled ? (name in formData ? formData[name] : formData.items[`item${idx}`][name]) : formData[name]}
+        value={name in formData ? formData[name] : formData.items[`item${idx}`][name]}
         onChange={onChange}
         className={`text-black bg-slate-50 mt-5 ${
           !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"

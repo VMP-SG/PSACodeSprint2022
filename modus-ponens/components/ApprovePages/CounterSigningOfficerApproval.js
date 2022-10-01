@@ -12,39 +12,20 @@ import SpacedText from "../Text/SpacedText";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
+import FormExterior from "../Requests/FormExterior";
 
 const CounterSigningOfficerApproval = ({ user, id }) => {
-  const [formData, setFormData] = useState({
-    status: 0,
-    company: "",
-    requestorFirstName: "",
-    requestorLastName: "",
-    requestorID: "",
-    mainDescription: "",
-    additionalDetails: "",
-    driverFirstName: "",
-    driverLastName: "",
-    driverPassNumber: "",
-    vehicleNumber: "",
-    items: {
-      item0: {
-        description: "",
-        quantity: "",
-        image: "",
-      },
-    },
-    designatedOfficer: "Koh Ming En",
-    counterSignee: "",
-    approvingAetosOfficer: "",
-  });
+  const [formData, setFormData] = useState({});
   const router = useRouter();
 
   useEffect(() => {
-    getPONData(id).then(({ data }) => {
-      console.log(data);
-      setFormData(data[id]);
-    });
-  }, []);
+    getPONData(id)
+      .then((res) => {
+        console.log(res.data);
+        setFormData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
   const handleDeny = () => {
     updateStatus(id, 5).then(router.push(`/dashboard/${user}`));
@@ -54,8 +35,9 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
     updateStatus(id, 2).then(router.push(`/dashboard/${user}`));
   };
 
-  return (
+  return formData?.mainDescription ? (
     <div className="bg-light-blue-0 pb-24">
+      {console.log(formData)}
       <DashBoardHeader numItems={6} />
       <ComponentContainer styles={"flex-col"}>
         <div className="flex">
@@ -67,17 +49,24 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
           </div>
           <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />
         </div>
-        {/* <ItemField formData={formData} isDisabled={true} /> */}
+        <ItemField formData={formData} isDisabled={true} />
         <SpacedText styles={`flex justify-between`}>
-        <Link href={`/dashboard/${user}`}>
-          <BlueBorderedButton>Cancel</BlueBorderedButton>
-        </Link>
-        <div/>
-        <RedButton onClick={handleDeny}>Deny</RedButton>
-        <GreenButton onClick={handleApprove}>Approve</GreenButton>
-      </SpacedText>
+          <Link href={`/dashboard/${user}`}>
+            <BlueBorderedButton>Cancel</BlueBorderedButton>
+          </Link>
+          <div />
+          <RedButton onClick={handleDeny}>Deny</RedButton>
+          <GreenButton onClick={handleApprove}>Approve</GreenButton>
+        </SpacedText>
       </ComponentContainer>
-      
+    </div>
+  ) : (
+    <div className="py-10">
+      <FormExterior>
+        <div className="font-bold text-3xl pb-10">
+          Request #{id} was not found
+        </div>
+      </FormExterior>
     </div>
   );
 };

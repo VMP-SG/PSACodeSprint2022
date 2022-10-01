@@ -7,97 +7,118 @@ import FullWidthButton from "./FullWidthButton";
 import StatusSection from "./StatusSection";
 import QRCode from "react-qr-code";
 import QRModal from "./QRModal";
+import getPONData from "../../api/getPONData";
+import ItemImage from "../ApprovePages/ItemImage";
 
-const RequestLeft = ({}) => {
+const RequestLeft = ({ data }) => {
   return (
     <div className="w-full px-5">
       <TextFieldHeaders title={"Company Details"} />
-      <UneditableTextField header={"Company"} type={"text"} value={"ABC"} />
+      <UneditableTextField
+        header={"Company"}
+        type={"text"}
+        value={data.company}
+      />
       <TextFieldHeaders title={"Requestor Details"} />
       <UneditableTextField
         header={"First Name"}
         type={"text"}
-        value={"Muthu"}
+        value={data.requestorFirstName}
       />
-      <UneditableTextField header={"Last Name"} type={"text"} value={"Bob"} />
+      <UneditableTextField
+        header={"Last Name"}
+        type={"text"}
+        value={data.requestorLastName}
+      />
       <UneditableTextField
         header={"Identification Number"}
         type={"text"}
-        value={"1231231"}
+        value={data.requestorID}
       />
       <TextFieldHeaders title={"Purpose of Entry"} />
       <UneditableTextField
         header={"Main Description"}
         type={"text"}
-        value={"Bring toilet paper"}
+        value={data.mainDescription}
       />
       <UneditableTextField
         header={"Additional details"}
         type={"text"}
-        value={"500 rolls"}
+        value={data.additionalDetails}
       />
       <TextFieldHeaders title={"Driver Details"} />
       <UneditableTextField
         header={"First Name"}
         type={"text"}
-        value={"Muthu"}
+        value={data.driverFirstName}
       />
       <UneditableTextField
         header={"Pass Number"}
         type={"text"}
-        value={"123123123"}
+        value={data.driverPassNumber}
       />
       <UneditableTextField
         header={"Vehicle Number"}
         type={"text"}
-        value={"SAD1241D"}
+        value={data.vehicleNumber}
       />
     </div>
   );
 };
-const RequestRight = ({}) => {
+const RequestRight = ({ data }) => {
   return (
     <div className="w-full px-5">
       <TextFieldHeaders title={"Items to be declared"} />
-      <UneditableTextField
-        header={"Item 1 Description"}
-        type={"text"}
-        value={"Fan"}
-      />
-      <UneditableTextField header={"Quantity"} type={"text"} value={"100"} />
-      <UneditableTextField
-        header={"Item 2 Description"}
-        type={"text"}
-        value={"Toilet paper"}
-      />
-      <UneditableTextField header={"Quantity"} type={"text"} value={"100"} />
-      <TextFieldHeaders title={"Status"} />
-      <StatusSection />
+      {Object.values(data.items).map((item, index) => {
+        return (
+          <>
+            <UneditableTextField
+              header={`Item ${index + 1} Description`}
+              type={"text"}
+              value={item.description}
+            />
+            <UneditableTextField
+              header={"Quantity"}
+              type={"text"}
+              value={item.quantity}
+            />
+            <ItemImage src={item.image} />
+          </>
+        );
+      })}
     </div>
   );
 };
 
 export default function ViewRequest({ id }) {
   const [open, setOpen] = useState(false);
-  return (
+  const [data, setData] = useState({});
+  useEffect(() => {
+    getPONData(id).then((res) => {
+      setData(res.data);
+    });
+  }, [id]);
+  return data?.additionalDetails ? (
     <div className="py-10">
       <FormExterior>
         <div className="font-bold text-3xl pb-10">Request #{id}</div>
         <MaxRow
-          leftChild={<RequestLeft />}
-          rightChild={<RequestRight />}
+          leftChild={<RequestLeft data={data} />}
+          rightChild={<RequestRight data={data} />}
           leftAlign="start"
           rightAlign="start"
         />
         <div>
           <FullWidthButton text={"Back"} type={2} onClick={() => {}} />
-          <FullWidthButton
-            text={"Generate QR Code"}
-            type={1}
-            onClick={() => {
-              setOpen(true);
-            }}
-          />
+          {data?.status == 3 ? (
+            <FullWidthButton
+              text={"Generate QR Code"}
+              type={1}
+              onClick={() => {
+                setOpen(true);
+              }}
+            />
+          ) : null}
         </div>
       </FormExterior>
       <QRModal
@@ -112,9 +133,20 @@ export default function ViewRequest({ id }) {
             Please show this to the AETOS Officer to complete your E-PON
             Submission
           </div>
-          <QRCode size={256} value={id ? id : ""} />
+          <QRCode
+            size={256}
+            value={id ? `localhost:3000/approval/aetos/${id}` : ""}
+          />
         </div>
       </QRModal>
+    </div>
+  ) : (
+    <div className="py-10">
+      <FormExterior>
+        <div className="font-bold text-3xl pb-10">
+          Request #{id} was not found
+        </div>
+      </FormExterior>
     </div>
   );
 }
