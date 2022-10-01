@@ -2,7 +2,7 @@ import { useState } from "react";
 import submitPONData from "../../api/submitPONData";
 import Page1 from "../../components/Form/Page1";
 import Page2 from "../../components/Form/Page2";
-import DashBoardHeader from "../../components/dashboard/DashboardHeader";
+import DashBoardHeader from "../../components/Dashboard/DashboardHeader";
 import updatePONData from "../../api/updatePONData";
 
 const defaultState = {
