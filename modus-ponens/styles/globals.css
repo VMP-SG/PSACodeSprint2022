@@ -5,6 +5,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .primary-button:hover {
+    box-shadow: 0px 12px 30px rgba(24, 92, 255, 0.18);
+  }
+  .red-button:hover {
+    box-shadow: 0px 12px 30px rgba(193, 64, 64, 0.18);
+  }
+  .green-button:hover {
+    box-shadow: 0px 12px 30px rgba(99, 178, 86, 0.18);
+  }
+}
+
 html,
 body {
   padding: 0;
