@@ -10,6 +10,8 @@ module.exports = {
         "blue-0": "#002E4B",
         "light-blue-0": "#F1F6FA",
         "blue-link": "#185CFF",
+        'dark-blue-main': '#1A2A48',
+        'grey-main':"#9597A0"
       },
       fontSize: {
         title: "2.875rem",
