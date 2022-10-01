@@ -56,8 +56,8 @@ export async function login(email, password){
 }
 
 
-export  function getUserData(){
-  return  auth.currentUser;
+export function getUserData(){
+  return auth.currentUser;
 }
 
 export function logout(){
