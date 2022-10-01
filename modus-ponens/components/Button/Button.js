@@ -1,10 +1,11 @@
 import Ctext from "../Text/Ctext";
 
-const Button = ({ children, styles, onClick }) => {
+const Button = ({ children, styles, onClick, onMouseOver }) => {
   return (
     <Ctext
       onClick={onClick}
-      styles={`my-auto rounded-md cursor-pointer w-[100px] px-5 py-2  ${styles}`}
+      onMouseOver={onMouseOver}
+      styles={`my-auto rounded-md cursor-pointer px-5 py-2  ${styles}`}
     >
       {children}
     </Ctext>

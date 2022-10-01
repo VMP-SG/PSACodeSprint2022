@@ -76,7 +76,7 @@ const RequestForm = () => {
   };
 
   const isFieldFilled = (name) => {
-    if (formData[name] && formData[name].length === 0) {
+    if (name in formData && formData[name].length === 0) {
       setError(name);
     }
   };
@@ -96,21 +96,15 @@ const RequestForm = () => {
 
   const handleNext = (e) => {
     e.preventDefault();
-    if (activePage === 0) {
-      for (var key in defaultErrorState1) {
-        isFieldFilled(key);
-      }
-      if (
-        Object.keys(defaultErrorState1).every(
-          (key) => errorState[key] === false
-        )
-      ) {
-        setActivePage(1);
-      }
-    } else {
-      for (var key in defaultErrorState2) {
-        isFieldFilled(key);
-      }
+    if (
+      activePage === 0 &&
+      Object.keys(defaultErrorState1).every((key) => errorState[key] === false)
+    ) {
+      setActivePage(1);
+    } else if (
+      activePage === 1 &&
+      Object.keys(defaultErrorState2).every((key) => errorState[key] === false)
+    ) {
       if (
         Object.keys(defaultErrorState2).every(
           (key) => errorState[key] === false
@@ -119,6 +113,19 @@ const RequestForm = () => {
         setActivePage(0);
       }
     }
+  };
+
+  const mouseOverHandler = () => {
+    if (activePage === 0) {
+      for (var key in defaultErrorState1) {
+        isFieldFilled(key);
+      }
+    } else {
+      for (var key in defaultErrorState2) {
+        isFieldFilled(key);
+      }
+    }
+    console.log("hello")
   };
 
   const addAdditionalItems = () => {
@@ -142,25 +149,17 @@ const RequestForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    for (var key in errorState) {
-      isFieldFilled(key);
-    }
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
         images.map((image, i) => {
-          var imgRef = ref(storage, `${name}/images/image_${i}.jpg`);
-          uploadString(imgRef, `${image.src.split(",")[1]}`, "base64")
-            .then(() => {
-              updatePONData(name, { ["image_" + i]: "image_" + i }).then(
-                (res) => console.log(res)
-              );
-            })
-            .catch((err) => console.log(err));
+          updatePONData(name, { ["image_" + i]: image.src }).then((res) =>
+            console.log(res)
+          );
         });
       });
       setFormData(defaultState);
       setActivePage(0);
+      setImages([]);
     }
   };
 
@@ -177,6 +176,7 @@ const RequestForm = () => {
           handleSubmit={handleSubmit}
           images={images}
           setImages={setImages}
+          mouseOverHandler={mouseOverHandler}
         />
       ) : (
         <Page1
@@ -184,6 +184,7 @@ const RequestForm = () => {
           errorState={errorState}
           handleChange={handleChange}
           togglePage={handleNext}
+          mouseOverHandler={mouseOverHandler}
         />
       )}
     </div>

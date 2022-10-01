@@ -6,7 +6,7 @@ import PurposeOfEntryField from "./components/PurposeOfEntryField";
 import Button from "../Button/Button";
 import SpacedText from "../Text/SpacedText";
 
-const Form = ({ onChange, formData, errorState, togglePage }) => {
+const Form = ({ onChange, formData, errorState, togglePage, mouseOverHandler }) => {
   return (
     <div className="font-primary w-1/2 grid grid-cols-2">
       <FormHeader>Submit New Request</FormHeader>
@@ -25,11 +25,12 @@ const Form = ({ onChange, formData, errorState, togglePage }) => {
         formData={formData}
         errorState={errorState}
       />
-      <SpacedText styles="flex col-span-2 m-auto justify-between font-primary text-[0.7rem]">
+      <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
         *Indicates compulsory fields
         <Button
           styles="w-fit px-5 py-2 bg-blue-link text-white"
           onClick={togglePage}
+          onMouseOver={mouseOverHandler}
         >
           Next
         </Button>
@@ -43,6 +44,7 @@ const Page1 = ({
   errorState,
   handleChange,
   togglePage,
+  mouseOverHandler
 }) => {
   return (
     <div className="flex flex-col">
@@ -52,6 +54,7 @@ const Page1 = ({
           formData={formData}
           errorState={errorState}
           togglePage={togglePage}
+          mouseOverHandler={mouseOverHandler}
         />
         <img src="/psa_0.jpg" className="object-cover w-1/2 flex" />
       </ComponentContainer>

@@ -1,23 +1,34 @@
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 import DashBoardHeader from "./DashboardHeader";
 import ComponentContainer from "../Container/ComponentContainer";
 import FormHeader from "../Form/components/FormHeader";
-import { useEffect, useState } from "react";
 import getPONData from "../../api/getPONData";
 import CompanyField from "../Form/components/CompanyField";
 import RequestorField from "../Form/components/RequestorField";
 import PurposeOfEntryField from "../Form/components/PurposeOfEntryField";
-import Button from "../Button/Button";
 import SpacedText from "../Text/SpacedText";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
+import Link from "next/link";
+import updateStatus from "../../api/updateStatus";
 
-const DO = ({ id }) => {
+const DO = ({ user, id }) => {
   const [formData, setFormData] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     getPONData(id).then(({ data }) => setFormData(data));
   }, []);
+
+  const handleDeny = () => {
+    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+  };
+
+  const handleApprove = () => {
+    updateStatus(id, 1).then(router.push(`/dashboard/${user}`));
+  };
 
   return (
     <div className="bg-light-blue-0 pb-24">
@@ -29,9 +40,11 @@ const DO = ({ id }) => {
           <RequestorField formData={formData} isDisabled={true} />
           <PurposeOfEntryField formData={formData} isDisabled={true} />
           <SpacedText styles={`flex justify-between`}>
-            <BlueBorderedButton>Cancel</BlueBorderedButton>
-            <RedButton>Deny</RedButton>
-            <GreenButton>Approve</GreenButton>
+            <Link href={`/dashboard/${user}`}>
+              <BlueBorderedButton>Cancel</BlueBorderedButton>
+            </Link>
+            <RedButton onClick={handleDeny}>Deny</RedButton>
+            <GreenButton onClick={handleApprove}>Approve</GreenButton>
           </SpacedText>
         </div>
         <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />

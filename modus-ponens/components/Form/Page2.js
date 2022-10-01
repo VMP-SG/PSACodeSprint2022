@@ -1,9 +1,10 @@
 import FormHeader from "./components/FormHeader";
 import ComponentContainer from "../../components/Container/ComponentContainer";
-import Button from "../Button/Button";
 import SpacedText from "../Text/SpacedText";
 import DriverField from "./components/DriverField";
 import ItemField from "./components/ItemField";
+import BlueBorderedButton from "../Button/BlueBorderedButton";
+import BlueButton from "../Button/BlueButton";
 
 const Page2 = ({
   formData,
@@ -14,6 +15,7 @@ const Page2 = ({
   addAdditionalItems,
   images,
   setImages,
+  mouseOverHandler,
 }) => {
   return (
     <ComponentContainer>
@@ -39,22 +41,14 @@ const Page2 = ({
             setImages={setImages}
           />
         </div>
-        <SpacedText styles="flex col-span-2 m-auto justify-between font-primary text-[0.7rem]">
+        <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
           *Indicates compulsory fields
         </SpacedText>
-        <SpacedText styles="flex col-span-2 m-auto justify-between font-primary text-[0.7rem]">
-          <Button
-            styles="w-fit px-5 py-2 bg-white border border-blue-link text-blue-link font-semibold"
-            onClick={togglePage}
-          >
-            Back
-          </Button>
-          <Button
-            styles="w-fit px-5 py-2 bg-blue-link text-white"
-            onClick={handleSubmit}
-          >
+        <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
+          <BlueBorderedButton onClick={togglePage}>Back</BlueBorderedButton>
+          <BlueButton onClick={handleSubmit} onMouseOver={mouseOverHandler}>
             Submit
-          </Button>
+          </BlueButton>
         </SpacedText>
       </div>
     </ComponentContainer>
