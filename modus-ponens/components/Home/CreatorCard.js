@@ -10,7 +10,7 @@ export default function CreatorCard({ image, text, name, designation, url }) {
         <div className="text-grey-main my-5 mt-10">{text}</div>
         <div className="my-1 flex items-center">
           <div className="pr-2">{name}</div>
-          <a href={url}>
+          <a href={url} target="_blank" rel="noreferrer noopener">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 cursor-pointer"

@@ -48,8 +48,8 @@ const RightChild = () => {
         text={
           "“Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum.” "
         }
+        designation={"Web Developer, UI/UX Designer, VMP"}
         name={"Chay Hui Xiang"}
-        designation={"Web Developer, VMP"}
         image={Huix}
         url={"https://www.linkedin.com/in/hui-xiang/"}
       />

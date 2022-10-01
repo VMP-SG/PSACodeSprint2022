@@ -115,7 +115,6 @@ const RightChild = () => {
       <div className="flex flex-row-reverse justify-between items-center">
         <HeroButton text="Send" type="submit" /> 
         <p>{emailStatus}</p>
-        {/* // onclick={() => {}} */}
       </div>
     </form>
   );
@@ -124,7 +123,7 @@ const RightChild = () => {
 export default function ContactInformation() {
   return (
     <div className="flex justify-center">
-      <div className="w-[1280px] my-10">
+      <div className="w-[1280px] px-[55px] my-10">
         <MaxRow leftChild={<LeftChild />} rightChild={<RightChild />} leftAlign="start" />
       </div>
     </div>
