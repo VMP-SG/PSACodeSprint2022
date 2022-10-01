@@ -20,7 +20,7 @@ const Page2 = ({
 }) => {
   return (
     <ComponentContainer>
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 pr-10 pl-5">
         <div className="col-span-2">
           <FormHeader>Submit New Request</FormHeader>
           <DriverField
@@ -30,7 +30,7 @@ const Page2 = ({
           />
         </div>
         <div className="col-span-2">
-          <img src="/psa_0.jpg" className="h-full object-cover" />
+          <img src="/psa_0.jpg" className="h-full object-cover mt-6 w-[580px] ml-6" />
         </div>
         <div className="col-span-4">
           <ItemField
@@ -42,10 +42,10 @@ const Page2 = ({
             setImages={setImages}
           />
         </div>
-        <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
+        <SpacedText styles="flex col-span-2 justify-between font-primary text-[12px] items-center">
           *Indicates compulsory fields
         </SpacedText>
-        <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
+        <SpacedText styles="flex col-span-2 justify-between font-primary pr-0">
           <BlueBorderedButton onClick={togglePage}>Back</BlueBorderedButton>
           <BlueButton onClick={handleSubmit} onMouseOver={mouseOverHandler}>
             Submit
