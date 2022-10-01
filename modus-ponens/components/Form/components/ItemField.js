@@ -39,7 +39,7 @@ const ItemField = ({
       <CategoryHeader>Items to be declared</CategoryHeader>
       {rows.map((idx) => {
         return (
-          <div key={idx} className="grid grid-cols-2 mb-8">
+          <div key={idx} className="grid grid-cols-2 mb-8 gap-12">
             <div className="col-span-1">
               <InputField
                 title={`Item ${idx} description*`}
@@ -76,10 +76,10 @@ const ItemField = ({
         );
       })}
       {!isDisabled && (
-        <SpacedText styles={"col-span-2"}>
+        <SpacedText styles={"col-span-2 pr-0"}>
           <BlueButton
             onClick={addAdditionalItems}
-            styles="px-5 py-2 bg-blue-link text-white"
+            styles="px-5 py-3 bg-blue-link text-white w-full"
           >
             Add Additional Items
           </BlueButton>

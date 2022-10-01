@@ -1,9 +1,9 @@
-import React from "React";
+import React from "react";
 import { useDropzone } from "React-dropzone";
 import Image from "next/image";
 import Ctext from "../Text/Ctext";
-import SpacedText from "../Text/SpacedText";
 import Button from "../Button/Button";
+import Upload from "../../assets/Upload.svg";
 
 function DropZone({ onDrop, accept, open, image }) {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
@@ -20,26 +20,26 @@ function DropZone({ onDrop, accept, open, image }) {
     <div>
       {acceptedFiles.length === 0 && <div {...getRootProps({ className: "dropzone" })}>
         <input className="input-zone" {...getInputProps()} />
-        <div className="text-center mx-4 py-16 border-2 border-blue-link rounded-2xl">
+        <div className="text-center py-16 border-2 border-blue-link rounded-2xl">
           {isDragActive ? (
             <p className="dropzone-content">Release to drop the files here</p>
           ) : (
-            <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold"}>
+            <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer"}>
               Drag image to upload
-              {<div className="px-2">
-                <Image src="/upload.svg" height={30} width={30} className="px-2"/>
-              </div>}
+              <div className="px-2 flex items-center">
+                <Image src={Upload} className="px-2"/>
+              </div>
             </Ctext>
           )}
         </div>
-        <SpacedText>
-            <Button
-              onClick={open}
-              styles="px-5 py-2 bg-blue-link text-white"
-            >
-              Open
-            </Button>
-          </SpacedText>
+        <div className="mt-6">
+          <Button
+            onClick={open}
+            styles="px-5 py-3 bg-blue-link text-white primary-button"
+          >
+            Open
+          </Button>
+        </div>
       </div>}
       {acceptedFiles.length > 0 &&
         <div>
