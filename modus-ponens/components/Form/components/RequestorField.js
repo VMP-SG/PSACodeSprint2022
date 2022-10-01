@@ -1,7 +1,7 @@
 import CategoryHeader from "./CategoryHeader";
 import InputField from "./InputField";
 
-const RequestorField = ({ onChange, formData, errorState }) => {
+const RequestorField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
       <CategoryHeader>Requestor Details</CategoryHeader>
@@ -12,6 +12,7 @@ const RequestorField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Last Name"}
@@ -20,6 +21,7 @@ const RequestorField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
       <InputField
         title={"Identification Number"}
@@ -28,6 +30,7 @@ const RequestorField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
     </>
   );
