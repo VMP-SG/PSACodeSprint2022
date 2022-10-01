@@ -3,7 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-
     FIREBASE_CONFIG :{
       apiKey: "AIzaSyD7D8p_tpGw9iH1QZUFEo43ir2kR8XtR0g",
       authDomain: "modusponens-11bff.firebaseapp.com",
