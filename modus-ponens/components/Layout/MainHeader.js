@@ -5,30 +5,49 @@ import { useRouter } from "next/router";
 
 import Logo from "../../assets/logo.png";
 import LoginIcon from "../../assets/loginIcon.png";
+import LogoutModal from "../Account/LogoutModal";
 
-import { getUserData } from "../../api/auth";
+import { logout } from "../../api/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { getRoleAndName, truncateName } from "../../utils/strings";
 
 const MainHeader = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
-  console.log(currentRoute);
 
   const [user, setUser] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
 
+  const auth = getAuth();
   useEffect(() => {
-    setUser(getUserData);
-  });
+    // const user = getUserData();
+    // if (user) {
+    //   setUser(user);
+    // }
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      if (user) {
+        const [role, name] = getRoleAndName(user.displayName);
+        const truncatedName = truncateName(name);
+        setDisplayName(truncatedName);
+      } else {
+        setDisplayName("Login");
+      }
+    });
+  }, []);
 
   return (
-    <nav className="flex bg-dark-blue-main justify-center items-center w-[var(--max-screen-width)] px-40">
-      <div className="flex container max-w-7xl justify-between items-center">
+    <nav className="flex bg-dark-blue-main justify-center items-center w-full">
+      <div className="flex container max-w-7xl justify-between items-center w-full px-[55px]">
         <div className="nav-img flex-start">
           <Link href="/">
-            <Image src={Logo} />
+            <Image src={Logo} className="cursor-pointer" />
           </Link>
         </div>
 
-        <div className="nav-items flex-grow items-start pl-24">
+        <div class="nav-items flex-grow items-start pl-24">
           <ul className="nav-list flex text-white">
             <Link href="/">
               <li
@@ -99,15 +118,30 @@ const MainHeader = () => {
           </ul>
         </div>
 
-        {currentRoute != "/account/login" && (
+        {user ? (
+          <button
+            className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer"
+            onClick={() => setOpenLogoutModal(true)}
+          >
+            <Image src={LoginIcon} />
+            <span className="ml-3">{displayName}</span>
+          </button>
+        ) : (
           <Link href="/account/login">
             <div className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer">
               <Image src={LoginIcon} />
-              <span className="ml-3">Login</span>
+              <span className="ml-3">{displayName}</span>
             </div>
           </Link>
         )}
       </div>
+      <LogoutModal
+        open={openLogoutModal}
+        onClose={() => setOpenLogoutModal(false)}
+        headingText="Logout"
+        bodyText="Are you sure that you want to logout?"
+        onClickButton={logout}
+      />
     </nav>
   );
 };

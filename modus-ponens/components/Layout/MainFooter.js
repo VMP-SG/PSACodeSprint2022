@@ -6,7 +6,9 @@ import githubLogo from "../../assets/githubLogo.png";
 import { logout } from "../../api/auth";
 import { useRouter } from "next/router";
 import React, {useEffect, useState} from "react";
-import { getUserData } from "../../api/auth";
+// import { getUserData } from "../../api/auth";
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const MainFooter = () => {
 
@@ -15,13 +17,20 @@ const MainFooter = () => {
   console.log(currentRoute);
 
   const [user, setUser] = useState("")
+  const [displayName, setDisplayName] = useState("");
+
+  const auth = getAuth();
 
   useEffect( () => {
-    setUser(getUserData);
-    if(user == null) console.log("NOT LOGGED IN")
-    else {
-      console.log("email: "+ user['email'])
-      console.log("username: "+ user['displayName'])};
+    onAuthStateChanged(auth, user => {
+      setUser(user);
+      if(user == null) {
+        setDisplayName("Login");
+      }
+      else {
+        console.log("email: "+ user['email'])
+        console.log("username: "+ user['displayName'])};
+    });
   })
 
   return (

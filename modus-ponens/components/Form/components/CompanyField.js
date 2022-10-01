@@ -1,7 +1,7 @@
 import CategoryHeader from "./CategoryHeader";
 import InputField from "./InputField";
 
-const CompanyField = ({ onChange, formData, errorState }) => {
+const CompanyField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
       <CategoryHeader>Company Details</CategoryHeader>
@@ -12,6 +12,7 @@ const CompanyField = ({ onChange, formData, errorState }) => {
         onChange={onChange}
         formData={formData}
         errorState={errorState}
+        isDisabled={isDisabled}
       />
     </>
   );
