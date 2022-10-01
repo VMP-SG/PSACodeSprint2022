@@ -8,7 +8,7 @@ import SpacedText from "../Text/SpacedText";
 
 const Form = ({ onChange, formData, errorState, togglePage, mouseOverHandler }) => {
   return (
-    <div className="font-primary w-1/2 grid grid-cols-2">
+    <div className="font-primary w-1/2 grid grid-cols-2 mr-6">
       <FormHeader>Submit New Request</FormHeader>
       <CompanyField
         onChange={onChange}
@@ -25,10 +25,12 @@ const Form = ({ onChange, formData, errorState, togglePage, mouseOverHandler }) 
         formData={formData}
         errorState={errorState}
       />
-      <SpacedText styles="flex col-span-2 justify-between font-primary text-[0.7rem]">
-        *Indicates compulsory fields
+      <SpacedText styles="flex col-span-2 justify-between font-primary">
+        <p className="text-[0.7rem]">
+          *Indicates compulsory fields
+        </p>
         <Button
-          styles="w-fit px-5 py-2 bg-blue-link text-white"
+          styles="w-fit px-5 py-2 bg-blue-link text-white primary-button"
           onClick={togglePage}
           onMouseOver={mouseOverHandler}
         >
@@ -56,7 +58,7 @@ const Page1 = ({
           togglePage={togglePage}
           mouseOverHandler={mouseOverHandler}
         />
-        <img src="/psa_0.jpg" className="object-cover w-1/2 flex" />
+        <img src={"/psa_0.png"} className="object-cover w-[600px] flex mt-6 ml-6 mr-10" />
       </ComponentContainer>
     </div>
   );
