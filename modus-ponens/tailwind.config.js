@@ -22,6 +22,7 @@ module.exports = {
       },
       fontFamily: {
         primary: ["Manrope", "Helvetica", "Arial"],
+        secondary: ["Open Sans", "sans-serif"]
       },
     },
   },
