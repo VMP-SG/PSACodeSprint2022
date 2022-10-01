@@ -11,7 +11,6 @@ const MainHeader = () => {
     const router = useRouter();
     const currentRoute = router.pathname;
     console.log(currentRoute);
-
     return (
         <nav className="flex justify-center items-center pr-40 pl-40 bg-dark-blue-main">
             <div className ="flex container max-w-7xl justify-between items-center ">

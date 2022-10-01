@@ -1,37 +1,74 @@
-const axios = require("axios").default;
-const API_KEY = process.env.API_KEY
+import { initializeApp } from "firebase/app";
+import { 
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+ } from "firebase/auth";
 
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
+const firebaseConfig = process.env.FIREBASE_CONFIG
 
-export function signup(email,password){
-    const signupURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
-    const data = {
-        email: "email",
-        password: "password",
-        returnSecureToken: true
-    }
-    
-    axios.post(firebaseAuthURL, data)
-    .then( res => {
-        return (res['data']['idToken'], res['data']['refreshToken'])
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
+function updateUserProfile(displayName, photoURL){
+  var newDetails = {}
+  if(displayName != null) newDetails["displayName"] = displayName;
+  if(photoURL != null) newDetails["photoURL"] = photoURL;
+
+  updateProfile(auth.currentUser, newDetails)
+  .then((res) => {
+      console.log(res);
+      return res;
+  }).catch((error) => {
+      console.log(error);
+  });
 }
 
-export function signin(email, password){
-    const signinURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
-    const data = {
-                email: email,
-                password: password,
-                returnSecureToken: true
-    };
-    axios.post(signinURL,data)
-    .then((res) => {
-        return (res['data']['idToken'], res['data']['refreshToken'])
-    })
+export function signup(email, password, displayName, photoURL){
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+      const user = userCredential.user;
+      updateUserProfile(displayName, photoURL)
+  })
+  .then(()=>{login(email, password)})
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return errorMessage;
+});
 }
 
+export function login(email, password){
+  signInWithEmailAndPassword(auth, email, password)
+  .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage)
+  });
+}
 
+export function getUserData(){
+  onAuthStateChanged(auth, (user) => {
+      if (user) {    
+        return user['displayName']
+      } else {
+          return null; 
+      }
+    });
+}
 
-
+export function logout(){
+    signOut(auth).then(() => {
+      console.log("SignedOut")
+      return signout; 
+    }).catch((error) => {
+      return error;
+    });
+}
