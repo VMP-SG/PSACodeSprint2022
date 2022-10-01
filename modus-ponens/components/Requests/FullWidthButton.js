@@ -1,4 +1,4 @@
-export default function AccountButton({ text, type, onclick }) {
+export default function FullWidthButton({ text, type, onClick }) {
   const primary = {
     background: "#185CFF",
     color: "#FFFFFF",
@@ -13,8 +13,8 @@ export default function AccountButton({ text, type, onclick }) {
   return (
     <div
       style={type === 1 ? primary : outlined}
-      className="flex flex-row justify-center items-center w-[143px] py-[10px] px-[14px] m-2 cursor-pointer rounded-md"
-      onClick={onclick}
+      className="flex flex-row justify-center items-center py-[10px] px-[14px] m-2 cursor-pointer rounded-md"
+      onClick={() => onClick()}
     >
       {text}
     </div>

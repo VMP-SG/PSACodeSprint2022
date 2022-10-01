@@ -1,6 +1,6 @@
 export default function FormExterior({ children }) {
   return (
-    <div className="absolute flex flex-col justify-between w-[445px] h-[593px] right-[50px] bottom-[-30px] bg-white rounded-md shadow-xl p-10">
+    <div className="flex flex-col justify-between w-[1000px] bg-white rounded-md shadow-2xl p-10">
       {children}
     </div>
   );
