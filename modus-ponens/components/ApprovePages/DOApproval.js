@@ -13,6 +13,7 @@ import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 import Link from "next/link";
 import updateStatus from "../../api/updateStatus";
+import updatePONData from "../../api/updatePONData";
 
 const DOApproval = ({ user, id }) => {
   const [formData, setFormData] = useState({});
@@ -31,7 +32,9 @@ const DOApproval = ({ user, id }) => {
   };
 
   const handleApprove = () => {
-    updateStatus(id, 1).then(router.push(`/dashboard/${user}`));
+    updatePONData(id, { counterSignee: "Ng Ho Chi" }).then(
+      updateStatus(id, 1).then(router.push(`/dashboard/${user}`))
+    );
   };
 
   return (

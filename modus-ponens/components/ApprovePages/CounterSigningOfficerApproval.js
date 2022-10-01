@@ -13,6 +13,7 @@ import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 import FormExterior from "../Requests/FormExterior";
+import updatePONData from "../../api/updatePONData";
 
 const CounterSigningOfficerApproval = ({ user, id }) => {
   const [formData, setFormData] = useState({});
@@ -27,12 +28,14 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  const handleDeny = () => {
-    updateStatus(id, 5).then(router.push(`/dashboard/${user}`));
+  const handleApprove = () => {
+    updatePONData(id, { approvingAetosOfficer: "Chay Hui Xiang" }).then(
+      updateStatus(id, 2).then(router.push(`/dashboard/${user}`))
+    );
   };
 
-  const handleApprove = () => {
-    updateStatus(id, 2).then(router.push(`/dashboard/${user}`));
+  const handleDeny = () => {
+    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
   };
 
   return formData?.mainDescription ? (
