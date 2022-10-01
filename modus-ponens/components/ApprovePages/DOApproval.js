@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import DashBoardHeader from "./DashboardHeader";
+import DashBoardHeader from "../Dashboard/DashboardHeader";
 import ComponentContainer from "../Container/ComponentContainer";
 import FormHeader from "../Form/components/FormHeader";
 import getPONData from "../../api/getPONData";
@@ -14,7 +14,7 @@ import GreenButton from "../Button/GreenButton";
 import Link from "next/link";
 import updateStatus from "../../api/updateStatus";
 
-const DO = ({ user, id }) => {
+const DOApproval = ({ user, id }) => {
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
@@ -23,7 +23,7 @@ const DO = ({ user, id }) => {
   }, []);
 
   const handleDeny = () => {
-    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 4).then(router.push(`/dashboard/${user}`));
   };
 
   const handleApprove = () => {
@@ -53,4 +53,4 @@ const DO = ({ user, id }) => {
   );
 };
 
-export default DO;
+export default DOApproval;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import getPONData from "../../api/getPONData";
-import DashBoardHeader from "./DashboardHeader";
+import DashBoardHeader from "../Dashboard/DashboardHeader";
 import ComponentContainer from "../Container/ComponentContainer";
 import FormHeader from "../Form/components/FormHeader";
 import CompanyField from "../Form/components/CompanyField";
@@ -13,7 +13,7 @@ import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 
-const CounterSigningOfficer = ({ user, id }) => {
+const CounterSigningOfficerApproval = ({ user, id }) => {
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
@@ -25,11 +25,11 @@ const CounterSigningOfficer = ({ user, id }) => {
   }, []);
 
   const handleDeny = () => {
-    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 5).then(router.push(`/dashboard/${user}`));
   };
 
   const handleApprove = () => {
-    updateStatus(id, 1).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 2).then(router.push(`/dashboard/${user}`));
   };
 
   return (
@@ -68,4 +68,4 @@ const CounterSigningOfficer = ({ user, id }) => {
   );
 };
 
-export default CounterSigningOfficer;
+export default CounterSigningOfficerApproval;
