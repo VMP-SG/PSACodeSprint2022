@@ -4,9 +4,10 @@ export default function TextField({
   placeholder,
   value,
   setValue,
+  className,
 }) {
   return (
-    <div className="flex flex-col my-5">
+    <div className={`flex flex-col my-5 ${className}`}>
       <label className="my-1 text-gray-500 text-sm font-semibold">
         {header}
       </label>

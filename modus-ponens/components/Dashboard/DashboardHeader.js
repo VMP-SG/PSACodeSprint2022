@@ -3,7 +3,7 @@ import Ctext from "../../components/Text/Ctext";
 
 const DashBoardHeader = ({ numItems }) => {
   return (
-    <div className="bg-blue-0 py-36 space-y-7">
+    <div className="bg-dark-blue-main py-36 space-y-7">
       <Ctext styles={"text-title font-bold"}>Tasks Dashboard</Ctext>
       {numItems > 0 && (
         <Ctext styles={"text-subtitle"}>

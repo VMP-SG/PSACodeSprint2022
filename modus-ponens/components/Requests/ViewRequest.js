@@ -14,6 +14,11 @@ const RequestLeft = ({}) => {
       <TextFieldHeaders title={"Company Details"} />
       <UneditableTextField header={"Company"} type={"text"} value={"ABC"} />
       <TextFieldHeaders title={"Requestor Details"} />
+      <UneditableTextField
+        header={"First Name"}
+        type={"text"}
+        value={"Muthu"}
+      />
       <UneditableTextField header={"Last Name"} type={"text"} value={"Bob"} />
       <UneditableTextField
         header={"Identification Number"}
