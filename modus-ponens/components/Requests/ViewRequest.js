@@ -75,7 +75,7 @@ const RequestRight = ({}) => {
 export default function ViewRequest({ id }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
+    <div className="py-10">
       <FormExterior>
         <div className="font-bold text-3xl pb-10">Request #{id}</div>
         <MaxRow
