@@ -25,7 +25,7 @@ const RequestorField = ({ onChange, formData, errorState, isDisabled }) => {
       />
       <InputField
         title={"Identification Number"}
-        name={"id"}
+        name={"requestorID"}
         span={2}
         onChange={onChange}
         formData={formData}

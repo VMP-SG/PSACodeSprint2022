@@ -17,14 +17,14 @@ const defaultState = {
   driverLastName: "",
   driverPassNumber: "",
   vehicleNumber: "",
-  items: [
-    {
+  items: {
+    item0: {
       description: "",
       quantity: "",
       image: "",
-    }
-  ],
-  designatedOfficer: "",
+    },
+  },
+  designatedOfficer: "Koh Ming En",
   counterSignee: "",
   approvingAetosOfficer: "",
 };
@@ -42,12 +42,12 @@ const defaultErrorState2 = {
   driverLastName: false,
   driverPassNumber: false,
   vehicleNumber: false,
-  items: [
-    {
-      description: false,
-      quantity: false,
-    }
-  ],
+  // items: {
+  //   item0: {
+  //     description: false,
+  //     quantity: false,
+  //   },
+  // },
 };
 
 const RequestForm = () => {
@@ -90,6 +90,21 @@ const RequestForm = () => {
     });
   };
 
+  const handleItems = (e, idx) => {
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        items: {
+          ...prevState.items,
+          [`item${idx}`]: {
+            ...prevState.items[`item${idx}`],
+            [e.target.name]: e.target.value,
+          },
+        },
+      };
+    });
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     if (
@@ -121,37 +136,48 @@ const RequestForm = () => {
         isFieldFilled(key);
       }
     }
-    console.log("hello")
+    console.log("hello");
   };
 
   const addAdditionalItems = () => {
-    var newIdx = (Object.keys(formData).length - 11) / 2;
-    console.log(newIdx);
     setFormData((prevState) => {
       return {
         ...prevState,
-        [`description_${newIdx}`]: "",
-        [`quantity_${newIdx}`]: "",
+        items: {
+          ...prevState.items,
+          ["item" + Object.keys(prevState.items).length]: {
+            description: "",
+            quantity: "",
+            image: "",
+          },
+        },
       };
     });
-    setErrorState((prevState) => {
-      return {
-        ...prevState,
-        [`description_${newIdx}`]: false,
-        [`quantity_${newIdx}`]: false,
-      };
-    });
+    // setErrorState((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     items: {
+    //       ...prevState.items,
+    //       ["item" + Object.keys(prevState.items).length]: {
+    //         description: false,
+    //         quantity: false,
+    //       },
+    //     },
+    //   };
+    // });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
+        var items = {
+          ...formData.items,
+        };
         images.map((image, i) => {
-          updatePONData(name, { ["image_" + i]: image.src }).then((res) =>
-            console.log(res)
-          );
+          items[`item${i}`]["image"] = image.src;
         });
+        updatePONData(name, { items: items });
       });
       setFormData(defaultState);
       setActivePage(0);
@@ -161,12 +187,14 @@ const RequestForm = () => {
 
   return (
     <div className="bg-light-blue-0 pb-24">
+      {console.log(formData)}
       <DashBoardHeader numItems={6} />
       {activePage === 1 ? (
         <Page2
           formData={formData}
           errorState={errorState}
           handleChange={handleChange}
+          handleItems={handleItems}
           togglePage={handleNext}
           addAdditionalItems={addAdditionalItems}
           handleSubmit={handleSubmit}

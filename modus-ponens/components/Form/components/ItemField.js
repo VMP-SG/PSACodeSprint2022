@@ -17,9 +17,7 @@ const ItemField = ({
 }) => {
   var rows = [],
     i = 0,
-    len = !isDisabled
-      ? (Object.keys(formData).length - 11) / 2
-      : (Object.keys(formData).length - 11) / 3;
+    len = Object.keys(formData.items).length;
   while (i++ < len) rows.push(i);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -44,24 +42,27 @@ const ItemField = ({
           <div key={idx} className="grid grid-cols-2 mb-8">
             <div className="col-span-1">
               <InputField
-                title={`Item ${idx} description`}
-                name={`description_${idx - 1}`}
+                title={`Item ${idx} description*`}
+                name="description"
+                idx={idx - 1}
                 span={2}
-                onChange={onChange}
+                onChange={(e) => onChange(e, idx - 1)}
                 formData={formData}
                 errorState={errorState}
                 isDisabled={isDisabled}
               />
               <QuantityField
-                name={`quantity_${idx - 1}`}
+                name="quantity"
                 span={2}
-                onChange={onChange}
+                idx={idx - 1}
+                onChange={(e) => onChange(e, idx - 1)}
                 formData={formData}
                 errorState={errorState}
                 isDisabled={isDisabled}
               />
             </div>
             <div className="col-span-1 flex flex-col justify-end">
+              {console.log(images)}
               {!isDisabled && (
                 <DropZone
                   onDrop={onDrop}
@@ -69,7 +70,7 @@ const ItemField = ({
                   image={images ? images[idx - 1] : ""}
                 />
               )}
-              {isDisabled && <img src={formData[`image_${idx-1}`]} />}
+              {isDisabled && <img src={formData[`image_${idx - 1}`]} />}
             </div>
           </div>
         );

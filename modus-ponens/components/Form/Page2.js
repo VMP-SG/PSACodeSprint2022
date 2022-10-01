@@ -10,6 +10,7 @@ const Page2 = ({
   formData,
   errorState,
   handleChange,
+  handleItems,
   handleSubmit,
   togglePage,
   addAdditionalItems,
@@ -33,7 +34,7 @@ const Page2 = ({
         </div>
         <div className="col-span-4">
           <ItemField
-            onChange={handleChange}
+            onChange={handleItems}
             formData={formData}
             errorState={errorState}
             addAdditionalItems={addAdditionalItems}

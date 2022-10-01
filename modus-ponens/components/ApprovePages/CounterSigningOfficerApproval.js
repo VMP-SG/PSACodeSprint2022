@@ -14,13 +14,35 @@ import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 
 const CounterSigningOfficerApproval = ({ user, id }) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    status: 0,
+    company: "",
+    requestorFirstName: "",
+    requestorLastName: "",
+    requestorID: "",
+    mainDescription: "",
+    additionalDetails: "",
+    driverFirstName: "",
+    driverLastName: "",
+    driverPassNumber: "",
+    vehicleNumber: "",
+    items: {
+      item0: {
+        description: "",
+        quantity: "",
+        image: "",
+      },
+    },
+    designatedOfficer: "Koh Ming En",
+    counterSignee: "",
+    approvingAetosOfficer: "",
+  });
   const router = useRouter();
 
   useEffect(() => {
     getPONData(id).then(({ data }) => {
       console.log(data);
-      setFormData(data);
+      setFormData(data[id]);
     });
   }, []);
 
@@ -38,22 +60,14 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
       <ComponentContainer styles={"flex-col"}>
         <div className="flex">
           <div className="w-1/2">
-            <FormHeader>Approve Request #{id}</FormHeader>
+            <FormHeader>Approve Request</FormHeader>
+            <FormHeader>#{id}</FormHeader>
             <CompanyField formData={formData} isDisabled={true} />
             <DriverField formData={formData} isDisabled={true} />
-            {/* <RequestorField formData={formData} isDisabled={true} />
-              <PurposeOfEntryField formData={formData} isDisabled={true} />
-              <SpacedText styles={`flex justify-between`}>
-                <Link href={`/dashboard/${user}`}>
-                  <BlueBorderedButton>Cancel</BlueBorderedButton>
-                </Link>
-                <RedButton onClick={handleDeny}>Deny</RedButton>
-                <GreenButton onClick={handleApprove}>Approve</GreenButton>
-              </SpacedText> */}
           </div>
           <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />
         </div>
-        <ItemField formData={formData} isDisabled={true} />
+        {/* <ItemField formData={formData} isDisabled={true} /> */}
         <SpacedText styles={`flex justify-between`}>
         <Link href={`/dashboard/${user}`}>
           <BlueBorderedButton>Cancel</BlueBorderedButton>

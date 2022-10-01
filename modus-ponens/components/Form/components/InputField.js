@@ -1,9 +1,11 @@
+import { CLIENT_PUBLIC_FILES_PATH } from "next/dist/shared/lib/constants";
 import SpacedText from "../../Text/SpacedText";
 
 const InputField = ({
   title,
   name,
   span,
+  idx,
   onChange,
   formData,
   errorState,
@@ -18,7 +20,7 @@ const InputField = ({
       <input
         type="text"
         name={`${name}`}
-        value={formData[name]}
+        value={!isDisabled ? (name in formData ? formData[name] : formData.items[`item${idx}`][name]) : formData[name]}
         onChange={onChange}
         className={`text-black bg-slate-50 mt-5 ${
           !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
