@@ -1,22 +1,14 @@
-import React, { useEffect } from "react";
-// import RequestForm from "../components/Form/RequestForm";
-// import QueryRequest from "../components/test/QueryRequest";
-// import DashBoard from "./dashboard/[id]";
+import React from "react";
+import HeroSection from "../components/Home/HeroSection";
+import CreatorSection from "../components/Home/CreatorSection";
+import ContactSection from "../components/Home/ContactSection";
 
-
-
-export default function Home() {
-  // useEffect(() => {
-  //   // submitPONData({ fuck: "you" }).then((res) => console.log(res));
-  //   updateStatus("-NDDSfgNxziYq9czpWDx", 1).then((res) => console.log(res));
-  //   getPONData("-NDDSfgNxziYq9czpWDx").then((res) => console.log(res));
-  // }, []);
-
+export default function Index() {
   return (
-  <div>
-    {/* <RequestForm />
-    <QueryRequest filterKey={"company"} filter={"asdfasdf"}/>
-    <DashBoard /> */}
-  </div>
-  )
+    <div>
+      <HeroSection />
+      <CreatorSection />
+      <ContactSection />
+    </div>
+  );
 }

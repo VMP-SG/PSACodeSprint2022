@@ -13,7 +13,7 @@ export default function AccountButton({ text, type, onclick }) {
   return (
     <div
       style={type === 1 ? primary : outlined}
-      className="flex flex-row justify-center items-center w-[143px] py-[10px] px-[14px] m-2 cursor-pointer rounded-md"
+      className="flex flex-row justify-center items-center w-[150px] py-[10px] px-[14px] m-2 cursor-pointer rounded-md"
       onClick={onclick}
     >
       {text}
