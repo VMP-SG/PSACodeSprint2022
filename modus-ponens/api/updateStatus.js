@@ -1,4 +1,4 @@
-import updatePONData from "../../api/updatePONData";
+import updatePONData from "./updatePONData";
 
 const updateStatus = (id, status) => {
   return updatePONData(id, { status: status });

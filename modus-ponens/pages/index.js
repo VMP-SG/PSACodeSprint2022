@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import getPONData from "../api/getPONData";
 import RequestForm from "../components/Form/RequestForm";
 import QueryRequest from "../components/test/QueryRequest";
-import updateStatus from "./api/updateStatus";
+import updateStatus from "../api/updateStatus";
+import DashBoard from "./dashboard/[id]";
 
 export default function Home() {
   // useEffect(() => {
@@ -13,5 +14,6 @@ export default function Home() {
   return <div>
     <RequestForm />
     <QueryRequest filterKey={"company"} filter={"asdfasdf"}/>
+    <DashBoard />
   </div>;
 }
