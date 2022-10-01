@@ -5,21 +5,35 @@ import { useRouter } from "next/router";
 
 import Logo from "../../assets/logo.png";
 import LoginIcon from "../../assets/loginIcon.png";
+import LogoutModal from '../Account/LogoutModal';
 
-import { getUserData } from "../../api/auth";
+// import { getUserData } from "../../api/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const MainHeader = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
-  console.log(currentRoute);
 
+  const [user, setUser] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
 
-  const [user, setUser] = useState("")
-
-  useEffect( () => {
-    setUser(getUserData);
-  })
-
+  const auth = getAuth();
+  useEffect(() => {
+    // const user = getUserData();
+    // if (user) {
+    //   setUser(user);
+    // }
+    onAuthStateChanged(auth, user => {
+      setUser(user);
+      if (user) {
+        const name = user.displayName.split("/")[1];
+        setDisplayName(name.length > 7 ? `${name.substring(0,7)}...` : name);
+      } else {
+        setDisplayName("Login");
+      }
+    });
+  },[]);
 
 
   return (
@@ -101,15 +115,14 @@ const MainHeader = () => {
         </ul>
         </div>
 
-        {currentRoute != "/account/login" && <Link href="/account/login">
+        <Link href="/account/login"> 
           <div className="nav-button flex justify-center items-center px-6 py-3  rounded bg-white text text-black cursor-pointer">
             <Image src={LoginIcon} />
-            <span className="ml-3">Login</span>
+            <span className="ml-3">{displayName}</span>
           </div>
-        </Link>}
+        </Link>
       </div>
-   
-      
+      <LogoutModal open={openLogoutModal} onClose={() => setOpenLogoutModal(false)} headingText="Logout" />
     </nav>
   );
 };
