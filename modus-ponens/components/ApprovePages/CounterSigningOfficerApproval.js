@@ -12,8 +12,9 @@ import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 import FormExterior from "../Requests/FormExterior";
 import updatePONData from "../../api/updatePONData";
+import Header from "../Text/Header";
 
-const CounterSigningOfficerApproval = ({ user, id }) => {
+const CounterSigningOfficerApproval = ({ id, numItems }) => {
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
@@ -25,17 +26,17 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
 
   const handleApprove = () => {
     updatePONData(id, { approvingAetosOfficer: "Chay Hui Xiang" }).then(
-      updateStatus(id, 2).then(router.push(`/dashboard/${user}`))
+      updateStatus(id, 2).then(router.push(`/tasks`))
     );
   };
 
   const handleDeny = () => {
-    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 3).then(router.push(`/tasks`));
   };
 
   return formData?.mainDescription ? (
     <div>
-      <DashBoardHeader numItems={6} />
+      <Header title={"Approve Request"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         <div className="py-10">
           <FormExterior>
@@ -81,7 +82,7 @@ const CounterSigningOfficerApproval = ({ user, id }) => {
             </div>
             <ItemField formData={formData} isDisabled={true} />
             <SpacedText styles={`flex justify-between`}>
-              <Link href={`/dashboard/${user}`}>
+              <Link href={`/tasks`}>
                 <BlueBorderedButton>Cancel</BlueBorderedButton>
               </Link>
               <div />

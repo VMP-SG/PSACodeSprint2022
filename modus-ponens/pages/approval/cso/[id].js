@@ -6,6 +6,6 @@ export default function RequestPage() {
   const router = useRouter();
   const { id } = router.query;
   return (
-    <CounterSigningOfficerApproval id={id} user="placeholder" />
+    <CounterSigningOfficerApproval id={id} />
   );
 }
