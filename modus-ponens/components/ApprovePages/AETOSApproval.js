@@ -71,7 +71,7 @@ const RequestLeft = ({ data }) => {
 
 const RequestRight = ({ data }) => {
   return (
-    <div className="w-full px-5">
+    <div className="w-full px-5 mb-5">
       <TextFieldHeaders title={"Items to be declared"} />
       {Object.values(data.items).map((item, index) => {
         return (
@@ -99,9 +99,11 @@ export default function AETOSApproval({ user, id }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
   useEffect(() => {
-    getPONData(id).then((res) => {
-      setData(res.data);
-    });
+    if (id) {
+      getPONData(id).then((res) => {
+        setData(res.data);
+      });
+    }
   }, [id]);
   const handleDeny = () => {
     updateStatus(id, 6).then(router.push(`/dashboard/${user}`));

@@ -19,9 +19,11 @@ const CounterSigningOfficerApproval = ({ id, numItems }) => {
   const router = useRouter();
 
   useEffect(() => {
-    getPONData(id).then((res) => {
-      setFormData(res.data);
-    });
+    if (id) {
+      getPONData(id).then((res) => {
+        setFormData(res.data);
+      });
+    }
   }, [id]);
 
   const handleApprove = () => {
@@ -40,7 +42,9 @@ const CounterSigningOfficerApproval = ({ id, numItems }) => {
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         <div className="py-10">
           <FormExterior>
-            <div className="font-bold text-3xl pb-10">Request #{id}</div>
+            <div className="font-bold text-3xl pb-10">
+              Approve Request #{id}
+            </div>
             <div className="flex">
               <div className="w-1/2">
                 <TextFieldHeaders title={"Company Details"} />
@@ -95,11 +99,13 @@ const CounterSigningOfficerApproval = ({ id, numItems }) => {
     </div>
   ) : (
     <div className="py-10">
-      <FormExterior>
-        <div className="font-bold text-3xl pb-10">
-          Request #{id} was not found
-        </div>
-      </FormExterior>
+      <div className="flex flex-col items-center justify-center bg-light-blue-0">
+        <FormExterior>
+          <div className="font-bold text-3xl pb-10">
+            Request #{id} was not found
+          </div>
+        </FormExterior>
+      </div>
     </div>
   );
 };

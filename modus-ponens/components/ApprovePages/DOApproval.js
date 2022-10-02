@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import DashBoardHeader from "../Dashboard/DashboardHeader";
 import UneditableTextField from "../Requests/UneditableTextField";
 import TextFieldHeaders from "../Requests/TextFieldHeaders";
 import FormExterior from "../Requests/FormExterior";
-import FormHeader from "../Form/components/FormHeader";
 import getPONData from "../../api/getPONData";
-import CompanyField from "../Form/components/CompanyField";
-import RequestorField from "../Form/components/RequestorField";
-import PurposeOfEntryField from "../Form/components/PurposeOfEntryField";
 import SpacedText from "../Text/SpacedText";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
@@ -23,11 +18,13 @@ const DOApproval = ({ id, numItems }) => {
   const router = useRouter();
 
   useEffect(() => {
-    getPONData(id)
-      .then((res) => {
-        setFormData(res.data);
-      })
-      .catch((err) => console.log(err));
+    if (id) {
+      getPONData(id)
+        .then((res) => {
+          setFormData(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [id]);
 
   const handleDeny = () => {
@@ -100,12 +97,15 @@ const DOApproval = ({ id, numItems }) => {
       </div>
     </div>
   ) : (
-    <div className="py-10">
-      <FormExterior>
-        <div className="font-bold text-3xl pb-10">
-          Request #{id} was not found
-        </div>
-      </FormExterior>
+    <div>
+      <Header title={"Approve Request"} />
+      <div className="flex flex-col items-center justify-center bg-light-blue-0 py-10">
+        <FormExterior>
+          <div className="font-bold text-3xl pb-10">
+            Request #{id} was not found
+          </div>
+        </FormExterior>
+      </div>
     </div>
   );
 };
