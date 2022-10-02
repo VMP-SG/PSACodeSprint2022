@@ -187,23 +187,19 @@ const createRequest = () => {
     // });
   };
 
-  const submitImages = async (formData, images) => {
+  const submitImages = async (formData, images, name) => {
     var items = {
       ...formData.items,
     };
     var cvInitial = {};
 
-    console.log(images);
-
-    images.map((image, i) => {
-      items[`item${i}`]["image"] = image.src;
-      objectDetect(image.src)
-        .then(({ data }) => {
-          cvInitial[`item${i}`] = data;
-        })
-        .catch((err) => console.log(err));
-    });
-
+    for (var i = 0; i < images.length; i++) {
+      items[`item${i}`]["image"] = images[i].src;
+      cvInitial[`item${i}`] = await objectDetect(images[i].src);
+    }
+    await updatePONData(name, { cvInitial: cvInitial }).then((res) =>
+      console.log("FUCK", res)
+    );
     return [items, cvInitial];
   };
 
@@ -215,13 +211,9 @@ const createRequest = () => {
       minute: "2-digit",
     });
 
-    submitImages(formData, images).then((res) => {
+    submitImages(formData, images, name).then((res) => {
       updatePONData(name, { items: res[0] }).then(
-        updatePONData(name, { time: current }).then(
-          updatePONData(name, { cvInitial: res[1] }).then((res) =>
-            console.log(res)
-          )
-        )
+        updatePONData(name, { time: current })
       );
     });
   };
