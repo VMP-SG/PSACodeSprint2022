@@ -11,6 +11,7 @@ const ApproveModal = ({
   onClose,
   className,
   bodyText,
+  rejectCount,
   onClickButton,
 }) => {
   return (
@@ -39,10 +40,13 @@ const ApproveModal = ({
                 />
               )}
             </div>
+            {rejectCount && <div className="my-[20px] text-center font-secondary text-[16px]">
+              <span className="font-bold underline">{rejectCount}</span> items were rejected.
+            </div>}
             <div className="my-[30px] text-center font-secondary text-[16px]">
               {bodyText}
             </div>
-            <div className="flex justify-around">
+            <div className="flex justify-between px-[25px]">
               <BlueBorderedButton onClick={onClose}>Cancel</BlueBorderedButton>
               <BlueButton onClick={onClickButton}>Approve</BlueButton>
             </div>

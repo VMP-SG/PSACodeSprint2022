@@ -94,7 +94,7 @@ const RequestRight = ({ data }) => {
         // ]);
 
         // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
-        
+
       };
       reader.readAsDataURL(file);
       return file;
@@ -185,6 +185,7 @@ export default function AETOSApproval({ user, id }) {
         }}
         headingText={"Approve Request"}
         bodyText={"Are you sure you want to approve the request?"}
+        rejectCount={3}
         onClickButton={handleApprove}
       />
     </div>
