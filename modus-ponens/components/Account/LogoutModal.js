@@ -4,12 +4,19 @@ import { Transition } from "@headlessui/react";
 import Close from "../../assets/Close.svg";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import BlueButton from "../Button/BlueButton";
+import {logout} from "../../api/auth"
+import {useRouter} from "next/router"
+import { async } from '@firebase/util';
+
 
 const LogoutModal = ({ open, headingText, onClose, className, bodyText, onClickButton, borderButtonText, blueButtonText }) => {
-
-  const onClickBlueButton = () => {
+  const router = useRouter();
+  const onClickBlueButton = async () => {
     onClickButton();
     onClose();
+    await logout();
+    await router.push("/");
+    window.location.reload();
   }
 
   return (
