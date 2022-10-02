@@ -86,6 +86,7 @@ const RequestRight = ({ data }) => {
           </>
         );
       })}
+      <StatusSection status={data.status} />
     </div>
   );
 };
@@ -94,9 +95,11 @@ export default function ViewRequest({ id }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
   useEffect(() => {
-    getPONData(id).then((res) => {
-      setData(res.data);
-    });
+    if (id) {
+      getPONData(id).then((res) => {
+        setData(res.data);
+      });
+    }
   }, [id]);
   return data?.additionalDetails ? (
     <div className="py-10">
