@@ -6,6 +6,7 @@ import updatePONData from "../api/updatePONData";
 import Page1 from "../components/Form/Page1";
 import Page2 from "../components/Form/Page2";
 import HeroHeader from "../components/Layout/HeroHeader";
+import objectDetect from "../api/objectDetect";
 
 const defaultState = {
   status: 0,
@@ -30,6 +31,8 @@ const defaultState = {
   counterSignee: "",
   approvingAetosOfficer: "",
   time: "",
+  cvInitial: {},
+  cvFinal: {},
 };
 
 const defaultErrorState1 = {
@@ -71,8 +74,8 @@ const createRequest = () => {
           return {
             ...prevState,
             requestorID: user.displayName,
-          }
-        })
+          };
+        });
       }
     });
   }, []);
@@ -154,7 +157,6 @@ const createRequest = () => {
         isFieldFilled(key);
       }
     }
-    console.log("hello");
   };
 
   const addAdditionalItems = () => {
@@ -185,29 +187,82 @@ const createRequest = () => {
     // });
   };
 
+  const submitImages = async (formData, images) => {
+    var items = {
+      ...formData.items,
+    };
+    var cvInitial = {};
+
+    images.map((image, i) => {
+      items[`item${i}`]["image"] = image.src;
+      objectDetect(image.src)
+        .then(({ data }) => {
+          cvInitial[`item${i}`] = data;
+        })
+        .catch((err) => console.log(err));
+    });
+
+    return [items, cvInitial]
+  }
+
+  const updateAllData = async (name) => {
+    const now = new Date();
+    const current = now.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    var [items, cvInitial] = await submitImages(formData, images);
+    console.log(cvInitial)
+    updatePONData(name, { items: items }).then(
+      updatePONData(name, { time: current }).then(
+        updatePONData(name, { cvInitial: cvInitial }).then(res => console.log(res))
+      )
+    );
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const now = new Date();
-    const current = String(now.getHours()).padStart(2, "0"); + ":" + String(now.getMinutes()).padStart(2, "0");
+    // const now = new Date();
+    // const current = now.toLocaleTimeString("en-US", {
+    //   hour12: false,
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    // });
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
-        var items = {
-          ...formData.items,
-        };
-        images.map((image, i) => {
-          items[`item${i}`]["image"] = image.src;
-        });
-        updatePONData(name, { items: items }).then(
-          updatePONData(name, { time: current })
-        );
+        // var items = {
+        //   ...formData.items,
+        // };
+        // var cvInitial = {};
+
+        // images.map((image, i) => {
+        //   items[`item${i}`]["image"] = image.src;
+        //   objectDetect(image.src)
+        //     .then(({ data }) => {
+        //       cvInitial[`item${i}`] = data;
+        //     })
+        //     .catch((err) => console.log(err));
+        // });
+
+        // updatePONData(name, { items: items }).then(
+        //   updatePONData(name, { time: current }).then(
+        //     updatePONData(name, { cvInitial: cvInitial }).then(res => console.log(res))
+        //   )
+        // );
+        console.log(updateAllData(name))
       });
-      router.push('/myRequests');
+      router.push("/");
     }
   };
 
   return (
     <div>
-      <HeroHeader title={"Create Request"} subtitle={"Create your requests here!"} />
+      <HeroHeader
+        title={"Create Request"}
+        subtitle={"Create your requests here!"}
+      />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         {activePage === 1 ? (
           <Page2

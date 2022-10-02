@@ -12,7 +12,7 @@ import axios from 'axios'
 
 export default async function objectDetect(image){
     const body = {
-        "image": str(image).split(",")[1]
+        "image": image.split(",")[1]
     }
     const url = "https://main-code-sprint-backend-chayhuixiang.endpoint.ainize.ai/scoreimgs";
     const response = await axios.post(url, body);

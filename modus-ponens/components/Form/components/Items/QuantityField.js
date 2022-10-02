@@ -22,6 +22,7 @@ const QuantityField = ({
         // className={`text-black bg-slate-50 mt-5 ${
         //   !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
         // }`}
+        min="1"
         isDisabled={isDisabled}
       />
       {/* {!isDisabled && <p>Field cannot be empty!</p>} */}

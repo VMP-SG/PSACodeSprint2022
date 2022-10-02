@@ -15,7 +15,7 @@ const MainFooter = () => {
   const router = useRouter();
   const [openLogoutModal, setOpenLogoutModal] = useState(false);
   const currentRoute = router.pathname;
-  console.log(currentRoute);
+  // console.log(currentRoute);
 
   const [user, setUser] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -28,8 +28,8 @@ const MainFooter = () => {
       if (user == null) {
         setDisplayName("Login");
       } else {
-        console.log("email: " + user["email"]);
-        console.log("username: " + user["displayName"]);
+        // console.log("email: " + user["email"]);
+        // console.log("username: " + user["displayName"]);
       }
     });
   });

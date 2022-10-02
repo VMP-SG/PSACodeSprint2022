@@ -38,7 +38,6 @@ const tasks = () => {
         <div className="w-[1280px]">
           <div className="grid grid-cols-3 my-48 mx-20 gap-10">
             {Object.keys(data).map((id) => {
-              console.log(data[id].status);
               return (
                 <DashBoardCard
                   company={data[id].company}

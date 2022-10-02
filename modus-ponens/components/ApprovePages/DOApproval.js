@@ -13,7 +13,7 @@ import updateStatus from "../../api/updateStatus";
 import updatePONData from "../../api/updatePONData";
 import HeroHeader from "../Layout/HeroHeader";
 
-const DOApproval = ({ id, numItems }) => {
+const DOApproval = ({ id }) => {
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
