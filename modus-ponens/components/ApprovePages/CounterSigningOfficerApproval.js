@@ -91,8 +91,17 @@ const CounterSigningOfficerApproval = ({ id, numItems }) => {
                 <BlueBorderedButton>Cancel</BlueBorderedButton>
               </Link>
               <div />
-              <RedButton onClick={handleDeny}>Deny</RedButton>
-              <GreenButton onClick={handleApprove}>Approve</GreenButton>
+              {formData.status > 2 ? (
+                <div className="text-sm text-dark-red px-5 text-center">
+                  This request has been archived and can no longer be
+                  approved/denied
+                </div>
+              ) : (
+                <div className="flex justify-between w-[400px]">
+                  <RedButton onClick={handleDeny}>Deny</RedButton>
+                  <GreenButton onClick={handleApprove}>Approve</GreenButton>
+                </div>
+              )}
             </SpacedText>
           </FormExterior>
         </div>

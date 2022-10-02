@@ -201,16 +201,23 @@ export default function AETOSApproval({ id }) {
             <Link href={`/`}>
               <BlueBorderedButton>Cancel</BlueBorderedButton>
             </Link>
-            <div className="flex justify-between w-[400px]">
-              <RedButton onClick={handleDeny}>Deny</RedButton>
-              <GreenButton
-                onClick={() => {
-                  setOpen(true);
-                }}
-              >
-                Approve
-              </GreenButton>
-            </div>
+            {data.status > 2 ? (
+              <div className="text-sm text-dark-red">
+                This request has been archived and can no longer be
+                approved/denied
+              </div>
+            ) : (
+              <div className="flex justify-between w-[400px]">
+                <RedButton onClick={handleDeny}>Deny</RedButton>
+                <GreenButton
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Approve
+                </GreenButton>
+              </div>
+            )}
           </div>
         </div>
       </FormExterior>
