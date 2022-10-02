@@ -64,6 +64,7 @@ const createRequest = () => {
   });
   const [activePage, setActivePage] = useState(0);
   const [images, setImages] = useState([]);
+  // const [isSubmitted, setIs]
   const auth = getAuth();
   const router = useRouter();
 
@@ -173,18 +174,6 @@ const createRequest = () => {
         },
       };
     });
-    // setErrorState((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     items: {
-    //       ...prevState.items,
-    //       ["item" + Object.keys(prevState.items).length]: {
-    //         description: false,
-    //         quantity: false,
-    //       },
-    //     },
-    //   };
-    // });
   };
 
   const submitImages = async (formData, images, name) => {
@@ -195,10 +184,13 @@ const createRequest = () => {
 
     for (var i = 0; i < images.length; i++) {
       items[`item${i}`]["image"] = images[i].src;
-      cvInitial[`item${i}`] = await objectDetect(images[i].src);
+      var res = await objectDetect(images[i].src);
+      console.log(res)
+      if (res.status === 200)
+        cvInitial[`item${i}`] = res.data;
     }
     await updatePONData(name, { cvInitial: cvInitial }).then((res) =>
-      console.log("FUCK", res)
+      console.log("success: ", res)
     );
     return [items, cvInitial];
   };
@@ -213,43 +205,17 @@ const createRequest = () => {
 
     submitImages(formData, images, name).then((res) => {
       updatePONData(name, { items: res[0] }).then(
-        updatePONData(name, { time: current })
+        updatePONData(name, { time: current }).then(router.push("/myRequests"))
       );
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const now = new Date();
-    // const current = now.toLocaleTimeString("en-US", {
-    //   hour12: false,
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    // });
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
-        // var items = {
-        //   ...formData.items,
-        // };
-        // var cvInitial = {};
-
-        // images.map((image, i) => {
-        //   items[`item${i}`]["image"] = image.src;
-        //   objectDetect(image.src)
-        //     .then(({ data }) => {
-        //       cvInitial[`item${i}`] = data;
-        //     })
-        //     .catch((err) => console.log(err));
-        // });
-
-        // updatePONData(name, { items: items }).then(
-        //   updatePONData(name, { time: current }).then(
-        //     updatePONData(name, { cvInitial: cvInitial }).then(res => console.log(res))
-        //   )
-        // );
         updateAllData(name);
       });
-      // router.push("/");
     }
   };
 
