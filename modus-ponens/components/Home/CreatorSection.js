@@ -21,7 +21,7 @@ const LeftChild = () => {
       />
       <CreatorCard
         text={
-          "I'm a Year 2 Renaissance Engineering Programme Scholar specialising in the field of computer science. Through my years of tinkering in the field of science and research, I've developed a strong passion for computer science and software. So far, my software skillsets include web development, app development, backend development, firmware programming, cybersecurity and machine learning."
+          "Hi there! I’m a Year 2 Renaissance Engineering Programme Scholar at Nanyang Technological University. As a budding computer scientist, I’m eager to learn and explore the different technologies available today. Building Modus Ponens was an extremely interesting journey and I look forward to building other innovative solutions in the future!"
         }
         name={"Chang Dao Zheng"}
         designation={"Web Developer, VMP"}

@@ -39,7 +39,7 @@ const MyRequest = () => {
   return (
     <div className="font-primary bg-light-blue-0 h-full">
       <HeroHeader
-        title={"Tasks Dashboard"}
+        title={"My Requests Dashboard"}
         subtitle={"View your requests here!"}
       />
       <div className="flex justify-center">
