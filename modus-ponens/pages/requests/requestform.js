@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import submitPONData from "../../api/submitPONData";
 import Page1 from "../../components/Form/Page1";
 import Page2 from "../../components/Form/Page2";
@@ -58,6 +59,20 @@ const RequestForm = () => {
   });
   const [activePage, setActivePage] = useState(0);
   const [images, setImages] = useState([]);
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setFormData((prevState) => {
+          return {
+            ...prevState,
+            requestorID: user.displayName,
+          }
+        })
+      }
+    });
+  }, []);
 
   const setError = (name) => {
     setErrorState((prevState) => {

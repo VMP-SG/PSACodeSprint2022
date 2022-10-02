@@ -7,11 +7,17 @@ const DashBoardCard = ({
   description,
   requestor,
   time,
+  images,
   url = "/",
 }) => {
+  var imageURLs = [];
+  for (var val of Object.values(images)) {
+    imageURLs.push(val.image)
+  }
+
   return (
     <div className="col-span-1">
-      <FramerMotion />
+      <FramerMotion images={imageURLs}/>
       <div className="text-black">
         <div className="p-10 font-primary bg-white rounded-b-md drop-shadow-lg">
           <div className="font-semibold text-xl">{company}</div>
