@@ -12,7 +12,7 @@ const LeftChild = () => {
     <div>
       <CreatorCard
         text={
-          "Hello! I am currently a Year 2 undergraduate pursuing a degree in Computer Science at the School of Computer Science and Engineering at Nanyang Technological University (NTU), Singapore. I am also under the CN Yang Scholars' Programme, which is an interdisciplinary, research-focused programme."
+          "Ming En is currently a Year 2 undergraduate pursuing a degree in Computer Science at the School of Computer Science and Engineering at Nanyang Technological University (NTU), Singapore. Ming En is also under the CN Yang Scholars' Programme, which is an interdisciplinary, research-focused programme."
         }
         name={"Koh Ming En"}
         designation={"Team Lead, VMP"}
@@ -21,7 +21,7 @@ const LeftChild = () => {
       />
       <CreatorCard
         text={
-          "Hi there! I’m a Year 2 Renaissance Engineering Programme Scholar at Nanyang Technological University. As a budding computer scientist, I’m eager to learn and explore the different technologies available today. Building Modus Ponens was an extremely interesting journey and I look forward to building other innovative solutions in the future!"
+          "Dao Zheng is a Year 2 Renaissance Engineering Programme Scholar at Nanyang Technological University. As a budding computer scientist, he's eager to learn and explore the different technologies available today. Building Modus Ponens was an extremely interesting journey for him and he looks forward to building other innovative solutions in the future."
         }
         name={"Chang Dao Zheng"}
         designation={"Web Developer, VMP"}
@@ -37,7 +37,7 @@ const RightChild = () => {
     <div>
       <CreatorCard
         text={
-          "I'm a second year student studying Computer Science at Nanyang Technological University under the CN Yang Scholars Programme. I’m extremely interested in anything related to technology, and have dabbled in multiple different areas of tech, including but not limited to Software Development, Cybersecurity, Machine Learning as well as Blockchain technologies."
+          "Ho Chi is a second year student studying Computer Science at Nanyang Technological University under the CN Yang Scholars Programme. He's extremely interested in anything related to technology, and has dabbled in multiple different areas of tech, including but not limited to Software Development, Cybersecurity, Machine Learning as well as Blockchain technologies."
         }
         name={"Ng Ho Chi"}
         designation={"Web Developer, VMP"}
@@ -46,7 +46,7 @@ const RightChild = () => {
       />
       <CreatorCard
         text={
-          "I'm a Year 2 Renaissance Engineering Programme Scholar specialising in the field of computer science. Through my years of tinkering in the field of science and research, I've developed a strong passion for computer science and software. So far, my software skillsets include web development, app development, backend development, firmware programming, cybersecurity and machine learning."
+          "Hui Xiang is a Year 2 Renaissance Engineering Programme Scholar specialising in the field of computer science. Through his years of tinkering in the field of science and research, he has developed a strong passion for computer science and software. So far, his software skillsets include web development, app development, backend development, firmware programming, cybersecurity and machine learning."
         }
         designation={"Web Developer & UI/UX Designer, VMP"}
         name={"Chay Hui Xiang"}
