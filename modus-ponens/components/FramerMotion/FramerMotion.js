@@ -51,7 +51,7 @@ const FramerMotion = ({ images }) => {
   };
 
   return (
-    <div className="relative h-[195px] w-[346.667px] overflow-hidden">
+    <div className="relative h-[195px] w-[346.667px] overflow-hidden rounded-t-md">
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
