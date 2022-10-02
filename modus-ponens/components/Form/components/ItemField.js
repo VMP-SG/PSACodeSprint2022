@@ -75,7 +75,7 @@ const ItemField = ({
                 </>
               )}
             </div>
-            <div className="col-span-1 flex flex-col justify-end">
+            <div className="col-span-1 flex flex-col justify-end mt-6">
               {console.log(images)}
               {!isDisabled && (
                 <DropZone
