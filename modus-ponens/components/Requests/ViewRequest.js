@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import MaxRow from "../Container/MaxRow";
 import FormExterior from "./FormExterior";
 import UneditableTextField from "./UneditableTextField";
@@ -94,6 +95,7 @@ const RequestRight = ({ data }) => {
 export default function ViewRequest({ id }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
+  const router = useRouter();
   useEffect(() => {
     if (id) {
       getPONData(id).then((res) => {
@@ -112,7 +114,13 @@ export default function ViewRequest({ id }) {
           rightAlign="start"
         />
         <div>
-          <FullWidthButton text={"Back"} type={2} onClick={() => {}} />
+          <FullWidthButton
+            text={"Back"}
+            type={2}
+            onClick={() => {
+              router.push("/myRequests");
+            }}
+          />
           {data?.status == 3 ? (
             <FullWidthButton
               text={"Generate QR Code"}
