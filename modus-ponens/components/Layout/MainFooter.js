@@ -43,10 +43,10 @@ const MainFooter = () => {
               <Image src={Logo} />
             </div>
             <div className="sm:max-w-xs text-xs text-grey-main">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a{" "}
+              Skip the need for multiple rounds of printing and signing physical
+              carbon copies of PONs with our fully digital solution that heavily
+              simplifies the issuance of PONs via thorough automation,
+              user-friendly processes and computer vision.
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 export default function CreatorCard({ image, text, name, designation, url }) {
   return (
-    <div className="flex flex-col justify-between w-[575px] bg-white rounded-md shadow-2xl p-10 my-[100px]">
+    <div className="flex flex-col justify-between w-[575px] h-[350px] bg-white rounded-md shadow-2xl p-10 my-[100px]">
       <div className="relative">
         <img
           src={image.src}
