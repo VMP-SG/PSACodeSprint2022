@@ -4,7 +4,7 @@ const StatusButton = ({ status, onClick, onMouseOver }) => {
     console.log(status)
   return (
     <Button
-      styles={"bg-white border border-slate-300 text-slate-300"}
+      styles={"bg-white border border-slate-300 text-slate-300 h-[33px] flex items-center justify-center"}
       onClick={onClick}
       onMouseOver={onMouseOver}
     >

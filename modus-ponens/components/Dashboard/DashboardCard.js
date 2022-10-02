@@ -33,8 +33,8 @@ const DashBoardCard = ({
     <div className="col-span-1">
       <FramerMotion images={imageURLs} />
       <div className="text-black">
-        <div className="p-10 font-primary bg-white rounded-b-md drop-shadow-lg">
-          <div className="flex justify-between">
+        <div className="p-5 font-primary bg-white rounded-b-md drop-shadow-lg">
+          <div className="flex justify-between items-center">
             <div className="font-semibold text-xl">{company}</div>
             {status !== null && <StatusButton status={parseStatusFlag(status)} />}
           </div>
