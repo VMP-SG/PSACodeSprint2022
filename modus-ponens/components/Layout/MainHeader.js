@@ -106,7 +106,7 @@ const MainHeader = () => {
               </div>
             )}
 
-            <a href="https://github.com/ReallyEnthusiasticProgrammersDLW2022/Backend" target="_blank" rel="noreferrer noopener">
+            <a href="https://github.com/VMP-SG/PSACodeSprint2022" target="_blank" rel="noreferrer noopener">
               <li
                 className={
                   "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +

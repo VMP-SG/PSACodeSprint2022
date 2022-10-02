@@ -26,7 +26,7 @@ const DashBoardCard = ({
               Items: {description}
             </TwoLinesText>
             <p className="text-md">
-              {requestor} | {time}
+              {requestor} | {time ? time : "23:59"}
             </p>
           </div>
           <Link href={url}>

@@ -16,8 +16,9 @@ import GreenButton from "../Button/GreenButton";
 import Link from "next/link";
 import updateStatus from "../../api/updateStatus";
 import updatePONData from "../../api/updatePONData";
+import Header from "../Text/Header";
 
-const DOApproval = ({ user, id }) => {
+const DOApproval = ({ id, numItems }) => {
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
@@ -30,19 +31,18 @@ const DOApproval = ({ user, id }) => {
   }, [id]);
 
   const handleDeny = () => {
-    updateStatus(id, 4).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 4).then(router.push(`/tasks`));
   };
 
   const handleApprove = () => {
     updatePONData(id, { counterSignee: "Ng Ho Chi" }).then(
-      updateStatus(id, 1).then(router.push(`/dashboard/${user}`))
+      updateStatus(id, 1).then(router.push(`/tasks`))
     );
   };
 
   return formData?.mainDescription ? (
     <div>
-      {/* {console.log(formData)} */}
-      <DashBoardHeader numItems={6} />
+      <Header title={"Approve Request"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         <div className="py-10">
           <FormExterior>
@@ -86,7 +86,7 @@ const DOApproval = ({ user, id }) => {
                   value={formData.additionalDetails}
                 />
                 <SpacedText styles={`flex justify-between`}>
-                  <Link href={`/dashboard/${user}`}>
+                  <Link href={`/tasks`}>
                     <BlueBorderedButton>Cancel</BlueBorderedButton>
                   </Link>
                   <RedButton onClick={handleDeny}>Deny</RedButton>

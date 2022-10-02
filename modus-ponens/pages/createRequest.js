@@ -4,7 +4,7 @@ import submitPONData from "../api/submitPONData";
 import updatePONData from "../api/updatePONData";
 import Page1 from "../components/Form/Page1";
 import Page2 from "../components/Form/Page2";
-import CreateNewFormHeader from "../components/Form/components/CreateNewFormHeader";
+import Header from "../components/Text/Header";
 
 const defaultState = {
   status: 0,
@@ -28,6 +28,7 @@ const defaultState = {
   designatedOfficer: "Chay Hui Xiang",
   counterSignee: "",
   approvingAetosOfficer: "",
+  time: "",
 };
 
 const defaultErrorState1 = {
@@ -184,6 +185,8 @@ const myRequests = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const now = new Date();
+    const current = now.getHours() + ":" + now.getMinutes();
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
         var items = {
@@ -192,7 +195,9 @@ const myRequests = () => {
         images.map((image, i) => {
           items[`item${i}`]["image"] = image.src;
         });
-        updatePONData(name, { items: items });
+        updatePONData(name, { items: items }).then(
+          updatePONData(name, { time: current })
+        );
       });
       setFormData(defaultState);
       setActivePage(0);
@@ -202,7 +207,7 @@ const myRequests = () => {
 
   return (
     <div>
-      <CreateNewFormHeader />
+      <Header title={"Create Request"} subtitle={"Create your requests here!"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         {activePage === 1 ? (
           <Page2

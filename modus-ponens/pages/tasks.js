@@ -8,11 +8,13 @@ import getPONData from "../api/getPONData";
 
 const tasks = () => {
   const [data, setData] = useState({});
+  const [url, setURL] = useState("");
   const auth = getAuth();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const [role, name] = getRoleAndName(user.displayName);
+        setURL(role === "DO" ? "/approval/do" : role === "PSA" ? "/approval/cso" : "/approval/aetos");
 
         var filteredData = {};
 
@@ -45,7 +47,7 @@ const tasks = () => {
         <div className="w-[1280px]">
           <div className="grid grid-cols-3 my-48 mx-20 gap-10">
             {Object.keys(data).map((id) => {
-                console.log(data[id].items)
+              console.log(data[id].items);
               return (
                 <DashBoardCard
                   company={data[id].company}
@@ -55,9 +57,10 @@ const tasks = () => {
                     " " +
                     data[id].requestorLastName
                   }
-                  time={"23:59"}
-                  key={id}
+                  time={data[id]?.time}
                   images={data[id].items}
+                  url={`${url}/${id}`}
+                  key={id}
                 />
               );
             })}
