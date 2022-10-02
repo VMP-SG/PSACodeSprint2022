@@ -32,7 +32,7 @@ const Form = ({
       <SpacedText styles="flex col-span-2 justify-between font-primary items-center">
         <p className="text-[0.7rem]">*Indicates compulsory fields</p>
         <Button
-          styles="w-fit px-5 py-2 bg-blue-link text-white primary-button"
+          styles="w-fit px-5 py-2 bg-blue-link text-white primary-button my-0"
           onClick={togglePage}
           onMouseOver={mouseOverHandler}
         >

@@ -26,6 +26,10 @@
   transform: scale(-1);
 }
 
+.next:hover, .prev:hover {
+  border: 1px solid black;
+}
+
 /* .image {
   position: absolute;
   max-width: 100vw;
