@@ -9,10 +9,10 @@ const LeftChild = () => {
         Secure your Pass Out Notes with ModusPonens
       </div>
       <div className="font-thin text-lg text-grey-main my-5">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo.
+        Skip the need for multiple rounds of printing and signing physical
+        carbon copies of PONs with our fully digital solution that heavily
+        simplifies the issuance of PONs via thorough automation, user-friendly
+        processes and computer vision.
       </div>
       <a
         href="https://github.com/VMP-SG/PSACodeSprint2022"
