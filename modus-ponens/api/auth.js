@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import { 
     getAuth,
     createUserWithEmailAndPassword,
@@ -60,11 +61,8 @@ export function getUserData(){
   return auth.currentUser;
 }
 
-export function logout(){
-    signOut(auth)
-    .then(() => {
-      console.log("Logged Out")
-    }).catch((error) => {
-      return error;
-    });
+export async function logout(){
+    
+    await signOut(auth);
+    console.log("Logged Out");
 }

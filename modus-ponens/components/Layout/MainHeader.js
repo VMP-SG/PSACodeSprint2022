@@ -15,24 +15,21 @@ import { getRoleAndName, truncateName } from "../../utils/strings";
 const MainHeader = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
-  console.log(currentRoute);
 
   const [user, setUser] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [openLogoutModal, setOpenLogoutModal] = useState(false);
+  const [userRole, setUserRole] = useState("")
 
   const auth = getAuth();
   useEffect(() => {
-    // const user = getUserData();
-    // if (user) {
-    //   setUser(user);
-    // }
     onAuthStateChanged(auth, (user) => {
       setUser(user);
       if (user) {
         const [role, name] = getRoleAndName(user.displayName);
         const truncatedName = truncateName(name);
         setDisplayName(truncatedName);
+        setUserRole(role)
       } else {
         setDisplayName("Login");
       }
@@ -63,7 +60,7 @@ const MainHeader = () => {
               </li>
             </Link>
 
-            {user != null && (
+            {(userRole == "PSA" || userRole == "AETOS" || userRole == "DO") && (
               <div className="flex">
                 <Link href="/tasks">
                   <li
@@ -77,7 +74,8 @@ const MainHeader = () => {
                     Tasks
                   </li>
                 </Link>
-
+                
+                {(userRole == "PSA"|| userRole == "DO") &&(<div className="flex">
                 <Link href="/createRequest">
                   <li
                     className={
@@ -103,6 +101,8 @@ const MainHeader = () => {
                     My Requests
                   </li>
                 </Link>
+                </div>
+              )}
               </div>
             )}
 
