@@ -77,7 +77,7 @@ const MainHeader = () => {
 
                 {userRole == "PSA" && (
                   <div className="flex">
-                    <Link href="/createrequest">
+                    <Link href="/createRequest">
                       <li
                         className={
                           "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
@@ -90,7 +90,7 @@ const MainHeader = () => {
                       </li>
                     </Link>
 
-                    <Link href="/myrequests">
+                    <Link href="/myRequests">
                       <li
                         className={
                           "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +

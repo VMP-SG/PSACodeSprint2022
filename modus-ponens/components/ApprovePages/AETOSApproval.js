@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MaxRow from "../Container/MaxRow";
@@ -12,6 +12,8 @@ import updateStatus from "../../api/updateStatus";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
+import DropZone from "../ImageUpload/DropZone";
+import objectDetect from "../../api/objectDetect";
 
 const RequestLeft = ({ data }) => {
   return (
@@ -70,6 +72,38 @@ const RequestLeft = ({ data }) => {
 };
 
 const RequestRight = ({ data }) => {
+  const [images, setImages] = useState([]);
+  const [displayImage, setDisplayImage] = useState("");
+  const [dropzoneStatus, setDropzoneStatus] = useState(1);
+  const onDrop = useCallback(async (acceptedFiles) => {
+
+    // add API request here
+
+    acceptedFiles.map((file) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setImages((prevState) => [
+          ...prevState,
+          { id: Math.random(), src: e.target.result },
+        ]);
+      };
+      reader.readAsDataURL(file);
+      return file;
+    });
+
+    console.log(images);
+    // const base64 = images[images.length-1].src;
+    // console.log(base64);
+    // const result = await objectDetect(base64);
+    // const data = result.data;
+    // console.log(data.image);
+    // setDisplayImage(data.image);
+    // console.log(displayImage);
+
+    // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
+
+  }, []);
+
   return (
     <div className="w-full px-5 mb-5">
       <TextFieldHeaders title={"Items to be declared"} />
@@ -86,7 +120,14 @@ const RequestRight = ({ data }) => {
               type={"text"}
               value={item.quantity}
             />
-            <ItemImage src={item.image} />
+            <DropZone
+              onDrop={onDrop}
+              accept={"image/*"}
+              image={displayImage}
+              thumbnail={item.image}
+              status={dropzoneStatus} // status 1 == blue (yet to receive image), status 2 == red (denied), status 3 == blue (accepted)
+            />
+            {/* <ItemImage src={item.image} /> */}
           </>
         );
       })}

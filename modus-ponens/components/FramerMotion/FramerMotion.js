@@ -51,7 +51,7 @@ const FramerMotion = ({ images }) => {
   };
 
   return (
-    <div className="relative h-[195px] w-[346.667px] overflow-hidden rounded-t-md">
+    <div className="relative h-[195px] w-full overflow-hidden rounded-t-md">
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
@@ -77,7 +77,7 @@ const FramerMotion = ({ images }) => {
               paginate(-1);
             }
           }}
-          className={`absolute z-[-10] ${styles.image}`}
+          className={`absolute z-[-10] w-full ${styles.image}`}
         />
       </AnimatePresence>
       <div className={styles.next} onClick={() => paginate(1)}>
