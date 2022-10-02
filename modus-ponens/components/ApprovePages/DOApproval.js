@@ -11,7 +11,7 @@ import GreenButton from "../Button/GreenButton";
 import Link from "next/link";
 import updateStatus from "../../api/updateStatus";
 import updatePONData from "../../api/updatePONData";
-import Header from "../Text/Header";
+import HeroHeader from "../Layout/HeroHeader";
 
 const DOApproval = ({ id, numItems }) => {
   const [formData, setFormData] = useState({});
@@ -39,7 +39,7 @@ const DOApproval = ({ id, numItems }) => {
 
   return formData?.mainDescription ? (
     <div>
-      <Header title={"Approve Request"} />
+      <HeroHeader title={"Approve Request"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         <div className="py-10">
           <FormExterior>

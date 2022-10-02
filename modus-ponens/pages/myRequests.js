@@ -6,6 +6,7 @@ import DashBoardCard from "../components/Dashboard/DashboardCard";
 import DashBoardHeader from "../components/Dashboard/DashboardHeader";
 import getPONData from "../api/getPONData";
 import Header from "../components/Text/Header";
+import HeroHeader from "../components/Layout/HeroHeader";
 
 const tasks = () => {
   const [data, setData] = useState({});
@@ -32,7 +33,7 @@ const tasks = () => {
 
   return (
     <div className="font-primary bg-light-blue-0 h-full">
-      <Header title={"Tasks Dashboard"} subtitle={"View your requests here!"}/>
+      <HeroHeader title={"Tasks Dashboard"} subtitle={"View your requests here!"}/>
       <div className="flex justify-center">
         <div className="w-[1280px]">
           <div className="grid grid-cols-3 my-48 mx-20 gap-10">

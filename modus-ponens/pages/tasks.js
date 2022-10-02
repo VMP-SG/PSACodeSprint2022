@@ -64,54 +64,6 @@ const tasks = () => {
                 />
               );
             })}
-            {/* <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            />
-            <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            />
-            <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            />
-            <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            />
-            <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            />
-            <DashBoardCard
-              company={"ABC Pte Ltd"}
-              description={
-                "A cool wrench, A cool torch, Very Cool Earbuds, Ultra Amazing Things, The best items in the world no cap bro trust me"
-              }
-              requestor={"Ivan Loke"}
-              time={"23:59"}
-            /> */}
           </div>
         </div>
       </div>
