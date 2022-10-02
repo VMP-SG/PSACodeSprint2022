@@ -34,7 +34,7 @@ const Page2 = ({
           <div className="col-span-2">
             <img
               src="/psa_0.jpg"
-              className="h-full object-cover mt-6 w-[580px] ml-6"
+              className="h-full object-cover w-[403px] ml-6"
             />
           </div>
           <div className="col-span-4">
@@ -47,14 +47,14 @@ const Page2 = ({
               setImages={setImages}
             />
           </div>
-          <SpacedText styles="flex col-span-2 justify-between font-primary text-[12px] items-center">
+          <SpacedText styles="flex col-span-4 justify-between font-primary text-[12px] items-center">
             *Indicates compulsory fields
-          </SpacedText>
-          <SpacedText styles="flex col-span-2 justify-between font-primary pr-0">
-            <BlueBorderedButton onClick={togglePage}>Back</BlueBorderedButton>
-            <BlueButton onClick={handleSubmit} onMouseOver={mouseOverHandler}>
-              Submit
-            </BlueButton>
+            <div className="flex col-span-2 justify-between font-primary pr-0 w-[403px]">
+              <BlueBorderedButton onClick={togglePage}>Back</BlueBorderedButton>
+              <BlueButton onClick={handleSubmit} onMouseOver={mouseOverHandler}>
+                Submit
+              </BlueButton>
+            </div>
           </SpacedText>
         </div>
       </FormExterior>

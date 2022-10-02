@@ -20,11 +20,11 @@ function DropZone({ onDrop, accept, open, image }) {
     <div>
       {acceptedFiles.length === 0 && <div {...getRootProps({ className: "dropzone" })}>
         <input className="input-zone" {...getInputProps()} />
-        <div className="text-center py-16 border-2 border-blue-link rounded-2xl">
+        <div className="text-center py-16 border-2 border-blue-link rounded-2xl h-[140px]">
           {isDragActive ? (
             <p className="dropzone-content">Release to drop the files here</p>
           ) : (
-            <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer"}>
+            <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer h-full"}>
               Drag image to upload
               <div className="px-2 flex items-center">
                 <Image src={Upload} className="px-2"/>
