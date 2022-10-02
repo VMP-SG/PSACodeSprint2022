@@ -85,7 +85,7 @@ export default function StatusSection({ data }) {
       <StatusCircle
         type={statusTypes[status][0]}
         text={"Submission of Request"}
-        by={data.requestorLastName}
+        by={data.requestorID}
         line
       />
       <StatusCircle

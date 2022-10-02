@@ -145,10 +145,10 @@ export default function AETOSApproval({ user, id }) {
     }
   }, [id]);
   const handleDeny = () => {
-    updateStatus(id, 6).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 6).then(router.push(`/tasks`));
   };
   const handleApprove = () => {
-    updateStatus(id, 3).then(router.push(`/dashboard/${user}`));
+    updateStatus(id, 3).then(router.push(`/tasks`));
   };
   return data?.mainDescription ? (
     <div className="py-10">
