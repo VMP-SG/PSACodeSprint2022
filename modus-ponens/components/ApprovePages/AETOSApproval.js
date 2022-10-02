@@ -94,11 +94,7 @@ const RequestRight = ({ data }) => {
           initialItemObj
         ).reduce((partialSum, a) => partialSum + a, 0);
         var sum = 0;
-        console.log("itemObj", itemObj)
         for (var key of Object.keys(initialItemObj)) {
-          // console.log(key)
-          // console.log("initialItemObj[key]", initialItemObj[key])
-          // console.log("itemObj?.key", itemObj?.key)
           var num = key in itemObj ? itemObj[key] : 0;
           console.log("num", num)
           sum += Math.min(initialItemObj[key], num)

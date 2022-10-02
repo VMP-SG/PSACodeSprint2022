@@ -6,7 +6,7 @@ import DashBoardCard from "../components/Dashboard/DashboardCard";
 import getPONData from "../api/getPONData";
 import HeroHeader from "../components/Layout/HeroHeader";
 
-const tasks = () => {
+const MyRequest = () => {
   const [data, setData] = useState({});
   const baseURL = "/requests";
   const auth = getAuth();
@@ -23,8 +23,11 @@ const tasks = () => {
 
         getPONData("").then(({ data }) => {
           for (const [key, value] of Object.entries(data)) {
-            if (value.status in filteredData && value.requestorID === user.displayName) {
-              filteredData[value.status][key] = value
+            if (
+              value.status in filteredData &&
+              value.requestorID === user.displayName
+            ) {
+              filteredData[value.status][key] = value;
             }
           }
           setData(Object.assign({}, ...Object.values(filteredData)));
@@ -67,4 +70,4 @@ const tasks = () => {
   );
 };
 
-export default tasks;
+export default MyRequest;

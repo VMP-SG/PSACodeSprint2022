@@ -6,7 +6,7 @@ import DashBoardCard from "../components/Dashboard/DashboardCard";
 import DashBoardHeader from "../components/Dashboard/DashboardHeader";
 import getPONData from "../api/getPONData";
 
-const tasks = () => {
+const Tasks = () => {
   const [data, setData] = useState({});
   const [url, setURL] = useState("");
   const auth = getAuth();
@@ -14,7 +14,13 @@ const tasks = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const [role, name] = getRoleAndName(user.displayName);
-        setURL(role === "DO" ? "/approval/do" : role === "PSA" ? "/approval/cso" : "/approval/aetos");
+        setURL(
+          role === "DO"
+            ? "/approval/do"
+            : role === "PSA"
+            ? "/approval/cso"
+            : "/approval/aetos"
+        );
 
         var filteredData = {};
 
@@ -24,10 +30,14 @@ const tasks = () => {
               filteredData[key] = value;
             } else if (role === "AETOS" && value.status === 2) {
               filteredData[key] = value;
-            } else if (role === "PSA" && value.counterSignee === user.displayName && value.status === 1) {
+            } else if (
+              role === "PSA" &&
+              value.counterSignee === user.displayName &&
+              value.status === 1
+            ) {
               if (
                 value.requestorID === role + "/" + name ||
-                value.counterSignee === role+"/"+name
+                value.counterSignee === role + "/" + name
               ) {
                 filteredData[key] = value;
               }
@@ -71,4 +81,4 @@ const tasks = () => {
   );
 };
 
-export default tasks;
+export default Tasks;

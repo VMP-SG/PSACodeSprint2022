@@ -56,7 +56,7 @@ const defaultErrorState2 = {
   // },
 };
 
-const createRequest = () => {
+const CreateRequest = () => {
   const [formData, setFormData] = useState(defaultState);
   const [errorState, setErrorState] = useState({
     ...defaultErrorState1,
@@ -185,9 +185,8 @@ const createRequest = () => {
     for (var i = 0; i < images.length; i++) {
       items[`item${i}`]["image"] = images[i].src;
       var res = await objectDetect(images[i].src);
-      console.log(res)
-      if (res.status === 200)
-        cvInitial[`item${i}`] = res.data;
+      console.log(res);
+      if (res.status === 200) cvInitial[`item${i}`] = res.data;
     }
     await updatePONData(name, { cvInitial: cvInitial }).then((res) =>
       console.log("success: ", res)
@@ -253,4 +252,4 @@ const createRequest = () => {
   );
 };
 
-export default createRequest;
+export default CreateRequest;
