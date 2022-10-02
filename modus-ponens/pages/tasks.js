@@ -24,7 +24,7 @@ const tasks = () => {
               filteredData[key] = value;
             } else if (role === "AETOS" && value.status === 2) {
               filteredData[key] = value;
-            } else if (role === "PSA") {
+            } else if (role === "PSA" && value.counterSignee === user.displayName && value.status === 0) {
               if (
                 value.requestorID === role + "/" + name ||
                 value.counterSignee === name

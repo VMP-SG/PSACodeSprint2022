@@ -12,6 +12,7 @@ import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 import FormExterior from "../Requests/FormExterior";
 import updatePONData from "../../api/updatePONData";
+import updateStatus from "../../api/updateStatus";
 import HeroHeader from "../Layout/HeroHeader";
 
 const CounterSigningOfficerApproval = ({ id, numItems }) => {
