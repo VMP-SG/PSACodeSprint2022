@@ -52,7 +52,7 @@ const defaultErrorState2 = {
   // },
 };
 
-const createRequest = () => {
+const createrequest = () => {
   const [formData, setFormData] = useState(defaultState);
   const [errorState, setErrorState] = useState({
     ...defaultErrorState1,
@@ -236,4 +236,4 @@ const createRequest = () => {
   );
 };
 
-export default createRequest;
+export default createrequest;
