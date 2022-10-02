@@ -67,7 +67,7 @@ const MainFooter = () => {
                         Tasks
                       </li>
                     </Link>
-                    <Link href="/createrequest">
+                    <Link href="/createRequest">
                       <li className="nav-items text-xs m-5 cursor-pointer hover:underline">
                         Create
                       </li>

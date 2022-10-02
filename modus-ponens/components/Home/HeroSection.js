@@ -14,7 +14,13 @@ const LeftChild = () => {
         illo inventore veritatis et quasi architecto beatae vitae dicta sunt
         explicabo.
       </div>
-      <HeroButton text={"Learn More"} />
+      <a
+        href="https://github.com/VMP-SG/PSACodeSprint2022"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <HeroButton text={"Learn More"} />
+      </a>
     </div>
   );
 };
