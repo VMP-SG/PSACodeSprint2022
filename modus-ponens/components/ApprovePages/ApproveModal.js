@@ -40,8 +40,8 @@ const ApproveModal = ({
                 />
               )}
             </div>
-            {rejectCount && <div className="my-[20px] text-center font-secondary text-[16px]">
-              <span className="font-bold underline">{rejectCount}</span> {rejectCount > 1? "items were rejected": "item was rejected"}.
+            {rejectCount > 0 && <div className="my-[20px] text-center font-secondary text-[16px]">
+              <span className="font-bold underline">{rejectCount}</span> items were rejected.
             </div>}
             <div className="my-[30px] text-center font-secondary text-[16px]">
               {bodyText}

@@ -36,10 +36,12 @@ const DashBoardCard = ({
         <div className="p-5 font-primary bg-white rounded-b-md drop-shadow-lg">
           <div className="flex justify-between items-center">
             <div className="font-semibold text-xl">{company}</div>
-            {status !== null && <StatusButton status={parseStatusFlag(status)} />}
+            {status !== null && (
+              <StatusButton status={parseStatusFlag(status)} />
+            )}
           </div>
           <div className="py-2">
-            <TwoLinesText styles="text-md text-slate-300">
+            <TwoLinesText styles="text-md text-grey-main">
               Items: {description}
             </TwoLinesText>
             <p className="text-md">

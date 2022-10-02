@@ -86,8 +86,17 @@ const DOApproval = ({ id }) => {
                   <Link href={`/tasks`}>
                     <BlueBorderedButton>Cancel</BlueBorderedButton>
                   </Link>
-                  <RedButton onClick={handleDeny}>Deny</RedButton>
-                  <GreenButton onClick={handleApprove}>Approve</GreenButton>
+                  {formData.status > 2 ? (
+                    <div className="text-sm text-dark-red px-5 text-center">
+                      This request has been archived and can no longer be
+                      approved/denied
+                    </div>
+                  ) : (
+                    <div className="flex justify-between w-[400px]">
+                      <RedButton onClick={handleDeny}>Deny</RedButton>
+                      <GreenButton onClick={handleApprove}>Approve</GreenButton>
+                    </div>
+                  )}
                 </SpacedText>
               </div>
               <img src="/psa_1.jpg" className="object-cover w-1/2 flex mb-5" />
