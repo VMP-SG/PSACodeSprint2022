@@ -19,7 +19,7 @@ const MainHeader = () => {
   const [user, setUser] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [openLogoutModal, setOpenLogoutModal] = useState(false);
-  const [userRole, setUserRole] = useState("")
+  const [userRole, setUserRole] = useState("");
 
   const auth = getAuth();
   useEffect(() => {
@@ -29,7 +29,7 @@ const MainHeader = () => {
         const [role, name] = getRoleAndName(user.displayName);
         const truncatedName = truncateName(name);
         setDisplayName(truncatedName);
-        setUserRole(role)
+        setUserRole(role);
       } else {
         setDisplayName("Login");
       }
@@ -74,35 +74,36 @@ const MainHeader = () => {
                     Tasks
                   </li>
                 </Link>
-                
-                {(userRole == "PSA") &&(<div className="flex">
-                <Link href="/createRequest">
-                  <li
-                    className={
-                      "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                      (currentRoute == "/createRequest"
-                        ? " border-white"
-                        : " border-b-transparent")
-                    }
-                  >
-                    Create
-                  </li>
-                </Link>
 
-                <Link href="/myRequests">
-                  <li
-                    className={
-                      "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                      (currentRoute == "/myRequests"
-                        ? " border-white"
-                        : " border-b-transparent")
-                    }
-                  >
-                    My Requests
-                  </li>
-                </Link>
-                </div>
-              )}
+                {userRole == "PSA" && (
+                  <div className="flex">
+                    <Link href="/createrequest">
+                      <li
+                        className={
+                          "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                          (currentRoute == "/createrequest"
+                            ? " border-white"
+                            : " border-b-transparent")
+                        }
+                      >
+                        Create
+                      </li>
+                    </Link>
+
+                    <Link href="/myrequests">
+                      <li
+                        className={
+                          "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
+                          (currentRoute == "/myrequests"
+                            ? " border-white"
+                            : " border-b-transparent")
+                        }
+                      >
+                        My Requests
+                      </li>
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
 

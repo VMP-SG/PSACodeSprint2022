@@ -87,7 +87,7 @@ const RequestRight = ({ data }) => {
           </>
         );
       })}
-      <StatusSection status={data.status} />
+      <StatusSection data={data} />
     </div>
   );
 };

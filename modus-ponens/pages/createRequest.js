@@ -193,6 +193,8 @@ const createRequest = () => {
     };
     var cvInitial = {};
 
+    console.log(images);
+
     images.map((image, i) => {
       items[`item${i}`]["image"] = image.src;
       objectDetect(image.src)
@@ -202,8 +204,8 @@ const createRequest = () => {
         .catch((err) => console.log(err));
     });
 
-    return [items, cvInitial]
-  }
+    return [items, cvInitial];
+  };
 
   const updateAllData = async (name) => {
     const now = new Date();
@@ -213,14 +215,16 @@ const createRequest = () => {
       minute: "2-digit",
     });
 
-    var [items, cvInitial] = await submitImages(formData, images);
-    console.log(cvInitial)
-    updatePONData(name, { items: items }).then(
-      updatePONData(name, { time: current }).then(
-        updatePONData(name, { cvInitial: cvInitial }).then(res => console.log(res))
-      )
-    );
-  }
+    submitImages(formData, images).then((res) => {
+      updatePONData(name, { items: res[0] }).then(
+        updatePONData(name, { time: current }).then(
+          updatePONData(name, { cvInitial: res[1] }).then((res) =>
+            console.log(res)
+          )
+        )
+      );
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -251,9 +255,9 @@ const createRequest = () => {
         //     updatePONData(name, { cvInitial: cvInitial }).then(res => console.log(res))
         //   )
         // );
-        console.log(updateAllData(name))
+        updateAllData(name);
       });
-      router.push("/");
+      // router.push("/");
     }
   };
 

@@ -78,31 +78,32 @@ const StatusCircle = ({ type, by, text, line }) => {
   );
 };
 
-export default function StatusSection({ status }) {
+export default function StatusSection({ data }) {
+  const status = data.status;
   return (
     <div className="py-5">
       <StatusCircle
         type={statusTypes[status][0]}
         text={"Submission of Request"}
-        by={"Ivan Loke Zhi Hao"}
+        by={data.requestorLastName}
         line
       />
       <StatusCircle
         type={statusTypes[status][1]}
         text={"Approval by Designated Officer"}
-        by={"Koh Ming En"}
+        by={data.designatedOfficer}
         line
       />
       <StatusCircle
         type={statusTypes[status][2]}
         text={"Approval by Counter Signing Officer"}
-        by={"Chang Dao Zheng"}
+        by={data.counterSignee}
         line
       />
       <StatusCircle
         type={statusTypes[status][3]}
         text={"Submission to AETOS"}
-        by={"Ng Ho Chi"}
+        by={data.approvingAetosOfficer}
       />
     </div>
   );

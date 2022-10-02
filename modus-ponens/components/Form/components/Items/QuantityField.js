@@ -10,7 +10,7 @@ const QuantityField = ({
 }) => {
   return (
     <SpacedText styles={`flex flex-col col-span-${span}`}>
-      <label className="text-card-body text-slate-400">
+      <label className="my-1 text-gray-500 text-sm font-semibold">
         Quantity{isDisabled ? "" : "*"}
       </label>
       <input
@@ -18,7 +18,7 @@ const QuantityField = ({
         name="quantity"
         value={formData.items[`item${idx}`].quantity}
         onChange={onChange}
-        className={`text-black mt-5 border-b border-black`}
+        className={`border-0 border-b-2 focus:outline-none pb-2`}
         // className={`text-black bg-slate-50 mt-5 ${
         //   !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
         // }`}
