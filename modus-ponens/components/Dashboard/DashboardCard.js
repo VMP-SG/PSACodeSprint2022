@@ -1,6 +1,19 @@
 import Link from "next/link";
 import FramerMotion from "../FramerMotion/FramerMotion";
 import TwoLinesText from "../Text/TwoLinesText";
+import StatusButton from "../Button/StatusButton";
+
+const parseStatusFlag = (statusFlag) => {
+  return statusFlag >= 4
+    ? "Rejected"
+    : statusFlag === 1
+    ? "Pending CSO"
+    : statusFlag === 2
+    ? "Approved"
+    : statusFlag === 3
+    ? "Completed"
+    : "Pending DO";
+};
 
 const DashBoardCard = ({
   company,
@@ -8,19 +21,23 @@ const DashBoardCard = ({
   requestor,
   time,
   images,
+  status = null,
   url = "/",
 }) => {
   var imageURLs = [];
   for (var val of Object.values(images)) {
-    imageURLs.push(val.image)
+    imageURLs.push(val.image);
   }
 
   return (
     <div className="col-span-1">
-      <FramerMotion images={imageURLs}/>
+      <FramerMotion images={imageURLs} />
       <div className="text-black">
         <div className="p-10 font-primary bg-white rounded-b-md drop-shadow-lg">
-          <div className="font-semibold text-xl">{company}</div>
+          <div className="flex justify-between">
+            <div className="font-semibold text-xl">{company}</div>
+            {status !== null && <StatusButton status={parseStatusFlag(status)} />}
+          </div>
           <div className="py-2">
             <TwoLinesText styles="text-md text-slate-300">
               Items: {description}
