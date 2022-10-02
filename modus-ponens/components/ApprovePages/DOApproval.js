@@ -50,7 +50,7 @@ const DOApproval = ({ id, numItems }) => {
               Approve Request #{id}
             </div>
             <div className="flex">
-              <div className="flex flex-col w-1/2">
+              <div className="flex flex-col w-1/2 mr-5">
                 <TextFieldHeaders title={"Company Details"} />
                 <UneditableTextField
                   header={"Company"}
@@ -93,7 +93,7 @@ const DOApproval = ({ id, numItems }) => {
                   <GreenButton onClick={handleApprove}>Approve</GreenButton>
                 </SpacedText>
               </div>
-              <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />
+              <img src="/psa_1.jpg" className="object-cover w-1/2 flex mb-5" />
             </div>
           </FormExterior>
         </div>

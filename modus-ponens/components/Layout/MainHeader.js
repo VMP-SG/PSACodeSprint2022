@@ -78,11 +78,11 @@ const MainHeader = () => {
                   </li>
                 </Link>
 
-                <Link href="/requests/requestform">
+                <Link href="/createrequest">
                   <li
                     className={
                       "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                      (currentRoute == "/requests/requestform"
+                      (currentRoute == "/createrequest"
                         ? " border-white"
                         : " border-b-transparent")
                     }
