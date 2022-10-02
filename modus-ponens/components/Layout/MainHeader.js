@@ -75,7 +75,7 @@ const MainHeader = () => {
                   </li>
                 </Link>
                 
-                {(userRole == "PSA"|| userRole == "DO") &&(<div className="flex">
+                {userRole == "PSA" &&(<div className="flex">
                 <Link href="/createrequest">
                   <li
                     className={
