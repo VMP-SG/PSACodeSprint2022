@@ -185,7 +185,7 @@ export default function AETOSApproval({ user, id }) {
         }}
         headingText={"Approve Request"}
         bodyText={"Are you sure you want to approve the request?"}
-        rejectCount={3}
+        rejectCount={1}
         onClickButton={handleApprove}
       />
     </div>
