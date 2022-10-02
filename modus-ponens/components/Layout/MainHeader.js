@@ -75,12 +75,12 @@ const MainHeader = () => {
                   </li>
                 </Link>
                 
-                {userRole == "PSA" &&(<div className="flex">
-                <Link href="/createrequest">
+                {(userRole == "PSA") &&(<div className="flex">
+                <Link href="/createRequest">
                   <li
                     className={
                       "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                      (currentRoute == "/createrequest"
+                      (currentRoute == "/createRequest"
                         ? " border-white"
                         : " border-b-transparent")
                     }

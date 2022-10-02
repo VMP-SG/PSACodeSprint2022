@@ -6,6 +6,7 @@ import UneditableTextField from "../../Requests/UneditableTextField";
 import QuantityField from "./Items/QuantityField";
 import DescriptionField from "./Items/DescriptionField";
 import { useCallback } from "react";
+import ItemImage from "../../ApprovePages/ItemImage"
 
 const ItemField = ({
   onChange,
@@ -84,7 +85,7 @@ const ItemField = ({
                   image={images ? images[index] : ""}
                 />
               )}
-              {isDisabled && <img src={item.image} />}
+              {isDisabled && <ItemImage src={item.image} />}
             </div>
           </div>
         );

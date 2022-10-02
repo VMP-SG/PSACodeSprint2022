@@ -28,7 +28,7 @@ const CounterSigningOfficerApproval = ({ id, numItems }) => {
   }, [id]);
 
   const handleApprove = () => {
-    updatePONData(id, { approvingAetosOfficer: "Chay Hui Xiang" }).then(
+    updatePONData(id, { approvingAetosOfficer: "Chang Dao Zheng" }).then(
       updateStatus(id, 2).then(router.push(`/tasks`))
     );
   };

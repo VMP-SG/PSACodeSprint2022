@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import submitPONData from "../api/submitPONData";
 import updatePONData from "../api/updatePONData";
@@ -52,7 +53,7 @@ const defaultErrorState2 = {
   // },
 };
 
-const createrequest = () => {
+const createRequest = () => {
   const [formData, setFormData] = useState(defaultState);
   const [errorState, setErrorState] = useState({
     ...defaultErrorState1,
@@ -61,6 +62,7 @@ const createrequest = () => {
   const [activePage, setActivePage] = useState(0);
   const [images, setImages] = useState([]);
   const auth = getAuth();
+  const router = useRouter();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -186,7 +188,7 @@ const createrequest = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const now = new Date();
-    const current = now.getHours() + ":" + now.getMinutes();
+    const current = String(now.getHours()).padStart(2, "0"); + ":" + String(now.getMinutes()).padStart(2, "0");
     if (Object.values(errorState).every((value) => value === false)) {
       submitPONData(formData).then(({ data: { name } }) => {
         var items = {
@@ -199,9 +201,7 @@ const createrequest = () => {
           updatePONData(name, { time: current })
         );
       });
-      setFormData(defaultState);
-      setActivePage(0);
-      setImages([]);
+      router.push('/myRequests');
     }
   };
 
@@ -236,4 +236,4 @@ const createrequest = () => {
   );
 };
 
-export default createrequest;
+export default createRequest;

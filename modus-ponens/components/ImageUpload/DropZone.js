@@ -4,6 +4,7 @@ import Image from "next/image";
 import Ctext from "../Text/Ctext";
 import Button from "../Button/Button";
 import Upload from "../../assets/Upload.svg";
+import ItemImage from "../ApprovePages/ItemImage";
 
 function DropZone({ onDrop, accept, open, image }) {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
@@ -43,7 +44,7 @@ function DropZone({ onDrop, accept, open, image }) {
       </div>}
       {acceptedFiles.length > 0 &&
         <div>
-          <img src={image ? image.src : ""} />
+          <ItemImage src={image ? image.src : ""} />
           <Ctext styles={"text-card-body text-blue-link"}>Uploaded {acceptedFiles[0].path}</Ctext>
         </div>
       }
