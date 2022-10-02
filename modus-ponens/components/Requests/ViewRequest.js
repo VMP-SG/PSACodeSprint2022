@@ -103,7 +103,7 @@ export default function ViewRequest({ id }) {
       });
     }
   }, [id]);
-  return data?.additionalDetails ? (
+  return data?.mainDescription ? (
     <div className="py-10">
       <FormExterior>
         <div className="font-bold text-3xl pb-10">Request #{id}</div>
