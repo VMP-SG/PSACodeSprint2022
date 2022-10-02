@@ -121,7 +121,7 @@ export default function ViewRequest({ id }) {
               router.push("/myRequests");
             }}
           />
-          {data?.status == 3 ? (
+          {data?.status == 2 ? (
             <FullWidthButton
               text={"Generate QR Code"}
               type={1}
