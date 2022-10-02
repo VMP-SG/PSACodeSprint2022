@@ -13,6 +13,7 @@ import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
 import DropZone from "../ImageUpload/DropZone";
+import objectDetect from "../../api/objectDetect";
 
 const RequestLeft = ({ data }) => {
   return (
@@ -72,7 +73,9 @@ const RequestLeft = ({ data }) => {
 
 const RequestRight = ({ data }) => {
   const [images, setImages] = useState([]);
-  const onDrop = useCallback((acceptedFiles) => {
+  const [displayImage, setDisplayImage] = useState("");
+  const [dropzoneStatus, setDropzoneStatus] = useState(1);
+  const onDrop = useCallback(async (acceptedFiles) => {
 
     // add API request here
 
@@ -87,7 +90,22 @@ const RequestRight = ({ data }) => {
       reader.readAsDataURL(file);
       return file;
     });
+
+    console.log(images);
+    // const base64 = images[images.length-1].src;
+    // console.log(base64);
+    // const result = await objectDetect(base64);
+    // const data = result.data;
+    // console.log(data.image);
+    // setDisplayImage(data.image);
+    // console.log(displayImage);
+
   }, []);
+
+  useEffect(() => {
+    // const uploadedImage = images[0];
+
+  },[images]);
 
   return (
     <div className="w-full px-5 mb-5">
@@ -108,8 +126,9 @@ const RequestRight = ({ data }) => {
             <DropZone
               onDrop={onDrop}
               accept={"image/*"}
+              image={displayImage}
               thumbnail={item.image}
-              status={1} // status 1 == blue (yet to receive image), status 2 == red (denied), status 3 == blue (accepted)
+              status={dropzoneStatus} // status 1 == blue (yet to receive image), status 2 == red (denied), status 3 == blue (accepted)
             />
             {/* <ItemImage src={item.image} /> */}
           </>

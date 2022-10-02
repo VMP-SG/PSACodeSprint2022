@@ -43,40 +43,50 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
           </Button>
         </div>
       </div>}
-      {acceptedFiles.length > 0 &&
+      {acceptedFiles.length > 0 && !thumbnail &&
         <div>
           <ItemImage src={image ? image.src : ""} />
           <Ctext styles={"text-card-body text-blue-link"}>Uploaded {acceptedFiles[0].path}</Ctext>
         </div>
       }
       {
-        thumbnail &&
+        thumbnail && !image ?
         <div {...getRootProps({ className: "dropzone" })}>
-        <input className="input-zone" {...getInputProps()} />
-        {/* <div className="border-2 border-blue-link rounded-2xl h-[200px]"> */}
-          {isDragActive ? (
-            <div className="border-2 border-blue-link rounded-2xl h-[200px] flex items-center justify-center">
-              <p className="dropzone-content">Release to drop the files here</p>
-            </div>
-          ) : (
-            // <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer h-full"}>
-            //   Drag image to upload
-            //   <div className="px-2 flex items-center">
-            //     <Image src={Upload} className="px-2"/>
-            //   </div>
-            // </Ctext>
-            <ItemImage src={thumbnail} styles={`border-${dropzoneColour}`} />
-          )}
-        {/* </div> */}
-        <div className="mt-6">
-          <Button
-            onClick={open}
-            styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
-          >
-            Open Cross-Reference Image
-          </Button>
+          <input className="input-zone" {...getInputProps()} />
+          {/* <div className="border-2 border-blue-link rounded-2xl h-[200px]"> */}
+            {isDragActive ? (
+              <div className="border-2 border-blue-link rounded-2xl h-[200px] flex items-center justify-center">
+                <p className="dropzone-content">Release to drop the files here</p>
+              </div>
+            ) : (
+              // <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer h-full"}>
+              //   Drag image to upload
+              //   <div className="px-2 flex items-center">
+              //     <Image src={Upload} className="px-2"/>
+              //   </div>
+              // </Ctext>
+              <ItemImage src={thumbnail} styles={`border-${dropzoneColour}`} />
+            )}
+          <div className="mt-6">
+            <Button
+              onClick={open}
+              styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
+            >
+              Open Cross-Reference Image
+            </Button>
+          </div>
+        </div> :
+        <div>
+          <ItemImage src={`data:image/jpeg;base64,${image}`}/>
+          <div className="mt-6">
+            <Button
+              onClick={open}
+              styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
+            >
+              Open Cross-Reference Image
+            </Button>
+          </div>
         </div>
-      </div>
       }
       {/* <aside>
         <ul>{files}</ul>
