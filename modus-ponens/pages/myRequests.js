@@ -19,15 +19,11 @@ const tasks = () => {
           0: {},
           1: {},
           2: {},
-          3: {},
-          4: {},
-          5: {},
-          6: {},
         };
 
         getPONData("").then(({ data }) => {
           for (const [key, value] of Object.entries(data)) {
-            if (value.requestorID === user.displayName) {
+            if (value.status in filteredData && value.requestorID === user.displayName) {
               filteredData[value.status][key] = value
             }
           }

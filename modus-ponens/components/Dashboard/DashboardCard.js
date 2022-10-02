@@ -9,7 +9,7 @@ const parseStatusFlag = (statusFlag) => {
     : statusFlag === 1
     ? "Pending CSO"
     : statusFlag === 2
-    ? "Approved"
+    ? "Pending AETOS"
     : statusFlag === 3
     ? "Completed"
     : "Pending DO";

@@ -75,7 +75,7 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
               Open Cross-Reference Image
             </Button>
           </div>
-        </div> :
+        </div> : thumbnail &&
         <div>
           <ItemImage src={image}/>
           <div className="mt-6">
