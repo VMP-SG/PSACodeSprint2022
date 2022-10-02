@@ -2,7 +2,7 @@ import { useState } from "react";
 import { dummyImages } from "./dummyImages";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
-import styles from "./FramerMotion.module.css"
+import styles from "./FramerMotion.module.css";
 
 const variants = {
   enter: (direction) => {
@@ -51,7 +51,7 @@ const FramerMotion = ({ images }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-[195px] w-[346.667px] overflow-hidden">
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
@@ -77,7 +77,7 @@ const FramerMotion = ({ images }) => {
               paginate(-1);
             }
           }}
-          className={styles.image}
+          className={`absolute z-[-10] ${styles.image}`}
         />
       </AnimatePresence>
       <div className={styles.next} onClick={() => paginate(1)}>
