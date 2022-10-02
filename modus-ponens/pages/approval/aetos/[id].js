@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import AETOSApproval from "../../../components/ApprovePages/AETOSApproval";
-import Header from "../../../components/Text/Header";
+import HeroHeader from "../../../components/Text/Header";
 
 export default function RequestPage() {
   const router = useRouter();
