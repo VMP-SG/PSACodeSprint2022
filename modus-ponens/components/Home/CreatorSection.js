@@ -37,7 +37,7 @@ const RightChild = () => {
     <div>
       <CreatorCard
         text={
-          "I’m a second year student studying Computer Science at Nanyang Technological University under the CN Yang Scholars Programme. I’m extremely interested in anything related to technology, and have dabbled in multiple different areas of tech, including but not limited to Software Development, Cybersecurity, Machine Learning as well as Blockchain technologies."
+          "I'm a second year student studying Computer Science at Nanyang Technological University under the CN Yang Scholars Programme. I’m extremely interested in anything related to technology, and have dabbled in multiple different areas of tech, including but not limited to Software Development, Cybersecurity, Machine Learning as well as Blockchain technologies."
         }
         name={"Ng Ho Chi"}
         designation={"Web Developer, VMP"}
