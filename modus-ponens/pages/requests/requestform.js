@@ -24,7 +24,7 @@ const defaultState = {
       image: "",
     },
   },
-  designatedOfficer: "Koh Ming En",
+  designatedOfficer: "Chay Hui Xiang",
   counterSignee: "",
   approvingAetosOfficer: "",
 };

@@ -1,7 +1,6 @@
 import SpacedText from "../../../Text/SpacedText";
 
 const QuantityField = ({
-  name,
   idx,
   span,
   onChange,
@@ -16,15 +15,16 @@ const QuantityField = ({
       </label>
       <input
         type="number"
-        name={name}
-        value={formData.items[`item${idx}`][name]}
+        name="quantity"
+        value={formData.items[`item${idx}`].quantity}
         onChange={onChange}
-        className={`text-black bg-slate-50 mt-5 ${
-          !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
-        }`}
+        className={`text-black mt-5 border-b border-black`}
+        // className={`text-black bg-slate-50 mt-5 ${
+        //   !isDisabled && errorState[name] ? "border-2 border-red-700" : "border-b border-black"
+        // }`}
         isDisabled={isDisabled}
       />
-      {!isDisabled && errorState[name] && <p>Field cannot be empty!</p>}
+      {/* {!isDisabled && <p>Field cannot be empty!</p>} */}
     </SpacedText>
   );
 };

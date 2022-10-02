@@ -3,6 +3,8 @@ import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import SpacedText from "../../Text/SpacedText";
 import DropZone from "../../ImageUpload/DropZone";
 import UneditableTextField from "../../Requests/UneditableTextField";
+import QuantityField from "./Items/QuantityField";
+import DescriptionField from "./Items/DescriptionField";
 import { useCallback } from "react";
 
 const ItemField = ({
@@ -40,18 +42,38 @@ const ItemField = ({
         return (
           <div key={index} className="grid grid-cols-2 mb-8 gap-12">
             <div className="col-span-1">
-              <UneditableTextField
-                header={`Item ${index + 1} Description`}
-                type={"text"}
-                value={item.description}
-                className="mr-5"
-              />
-              <UneditableTextField
-                header={"Quantity"}
-                type={"text"}
-                value={item.quantity}
-                className="mr-5"
-              />
+              {!isDisabled && (
+                <>
+                  <DescriptionField
+                    idx={index}
+                    onChange={(e) => onChange(e, index)}
+                    formData={formData}
+                    errorState={errorState}
+                  />
+                  <QuantityField
+                    idx={index}
+                    onChange={(e) => onChange(e, index)}
+                    formData={formData}
+                    errorState={errorState}
+                  />
+                </>
+              )}
+              {isDisabled && (
+                <>
+                  <UneditableTextField
+                    header={`Item ${index + 1} Description`}
+                    type={"text"}
+                    value={item.description}
+                    className="mr-5"
+                  />
+                  <UneditableTextField
+                    header={"Quantity"}
+                    type={"text"}
+                    value={item.quantity}
+                    className="mr-5"
+                  />
+                </>
+              )}
             </div>
             <div className="col-span-1 flex flex-col justify-end">
               {console.log(images)}
@@ -59,7 +81,7 @@ const ItemField = ({
                 <DropZone
                   onDrop={onDrop}
                   accept={"image/*"}
-                  image={images ? images[index - 1] : ""}
+                  image={images ? images[index] : ""}
                 />
               )}
               {isDisabled && <img src={item.image} />}
