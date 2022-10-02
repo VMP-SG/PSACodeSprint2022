@@ -100,12 +100,9 @@ const RequestRight = ({ data }) => {
     // setDisplayImage(data.image);
     // console.log(displayImage);
 
+    // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
+
   }, []);
-
-  useEffect(() => {
-    // const uploadedImage = images[0];
-
-  },[images]);
 
   return (
     <div className="w-full px-5 mb-5">
