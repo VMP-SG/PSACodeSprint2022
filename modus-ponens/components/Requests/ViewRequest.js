@@ -106,14 +106,14 @@ export default function ViewRequest({ id }) {
   return data?.mainDescription ? (
     <div className="py-10">
       <FormExterior>
-        <div className="font-bold text-3xl pb-10">Request #{id}</div>
+        <div className="font-bold text-3xl pb-10 pl-5">Request #{id}</div>
         <MaxRow
           leftChild={<RequestLeft data={data} />}
           rightChild={<RequestRight data={data} />}
           leftAlign="start"
           rightAlign="start"
         />
-        <div>
+        <div className="px-3">
           <FullWidthButton
             text={"Back"}
             type={2}
