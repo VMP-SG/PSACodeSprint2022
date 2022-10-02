@@ -78,11 +78,11 @@ const MainHeader = () => {
                   </li>
                 </Link>
 
-                <Link href="/createRequest">
+                <Link href="/requests/requestform">
                   <li
                     className={
                       "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
-                      (currentRoute == "/createRequest"
+                      (currentRoute == "/requests/requestform"
                         ? " border-white"
                         : " border-b-transparent")
                     }
@@ -106,7 +106,11 @@ const MainHeader = () => {
               </div>
             )}
 
-            <a href="https://github.com/ReallyEnthusiasticProgrammersDLW2022/Backend" target="_blank" rel="noreferrer noopener">
+            <a
+              href="https://github.com/VMP-SG/PSACodeSprint2022"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <li
                 className={
                   "nav-items mx-5 border-b-2 hover:border-b-2 hover:border-grey-main cursor-pointer" +
