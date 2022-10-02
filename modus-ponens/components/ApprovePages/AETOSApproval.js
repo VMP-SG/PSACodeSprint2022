@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MaxRow from "../Container/MaxRow";
@@ -12,6 +12,7 @@ import updateStatus from "../../api/updateStatus";
 import BlueBorderedButton from "../Button/BlueBorderedButton";
 import RedButton from "../Button/RedButton";
 import GreenButton from "../Button/GreenButton";
+import DropZone from "../ImageUpload/DropZone";
 
 const RequestLeft = ({ data }) => {
   return (
@@ -70,6 +71,24 @@ const RequestLeft = ({ data }) => {
 };
 
 const RequestRight = ({ data }) => {
+  const [images, setImages] = useState([]);
+  const onDrop = useCallback((acceptedFiles) => {
+
+    // add API request here
+
+    acceptedFiles.map((file) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setImages((prevState) => [
+          ...prevState,
+          { id: Math.random(), src: e.target.result },
+        ]);
+      };
+      reader.readAsDataURL(file);
+      return file;
+    });
+  }, []);
+
   return (
     <div className="w-full px-5 mb-5">
       <TextFieldHeaders title={"Items to be declared"} />
@@ -86,7 +105,13 @@ const RequestRight = ({ data }) => {
               type={"text"}
               value={item.quantity}
             />
-            <ItemImage src={item.image} />
+            <DropZone
+              onDrop={onDrop}
+              accept={"image/*"}
+              thumbnail={item.image}
+              status={1} // status 1 == blue (yet to receive image), status 2 == red (denied), status 3 == blue (accepted)
+            />
+            {/* <ItemImage src={item.image} /> */}
           </>
         );
       })}
