@@ -58,7 +58,8 @@ export default function CreateAccount() {
     
     const user = await signup(email, password, shortRole+name)
     if(user == null) console.log("Sign Up Failed!");
-    else router.push("/");
+    else await router.push("/");
+    window.location.reload();
   }
   return (
     <AccountPage>

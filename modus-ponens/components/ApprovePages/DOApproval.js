@@ -32,7 +32,7 @@ const DOApproval = ({ id }) => {
   };
 
   const handleApprove = () => {
-    updatePONData(id, { counterSignee: "Ng Ho Chi" }).then(
+    updatePONData(id, { counterSignee: "PSA/Ng Ho Chi" }).then(
       updateStatus(id, 1).then(router.push(`/tasks`))
     );
   };

@@ -13,14 +13,16 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isWrongPassword, setIsWrongPassword] = useState(false)
-  const navigate = (link) => {
-    router.push(link);
+  const navigate = async(link) => {
+    await router.push(link);
   };
 
   const handleLogin = async () => {
     const username = await login(email, password)
     if (username!=null){
-      navigate("/");
+      await navigate("/");
+      window.location.reload();
+
     } 
     else {
       setIsWrongPassword(true);      
