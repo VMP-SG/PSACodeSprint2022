@@ -114,7 +114,7 @@ export default function AETOSApproval({ user, id }) {
   return data?.mainDescription ? (
     <div className="py-10">
       <FormExterior>
-        <div className="font-bold text-3xl pb-10">Request #{id}</div>
+        <div className="font-bold text-3xl pb-10 pl-5">Request #{id}</div>
         <MaxRow
           leftChild={<RequestLeft data={data} />}
           rightChild={<RequestRight data={data} />}
@@ -122,18 +122,20 @@ export default function AETOSApproval({ user, id }) {
           rightAlign="start"
         />
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between px-[20px]">
             <Link href={`/`}>
               <BlueBorderedButton>Cancel</BlueBorderedButton>
             </Link>
-            <RedButton onClick={handleDeny}>Deny</RedButton>
-            <GreenButton
-              onClick={() => {
-                setOpen(true);
-              }}
-            >
-              Approve
-            </GreenButton>
+            <div className="flex justify-between w-[400px]">
+              <RedButton onClick={handleDeny}>Deny</RedButton>
+              <GreenButton
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
+                Approve
+              </GreenButton>
+            </div>
           </div>
         </div>
       </FormExterior>

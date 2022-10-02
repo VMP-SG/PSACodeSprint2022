@@ -4,7 +4,7 @@ import submitPONData from "../api/submitPONData";
 import updatePONData from "../api/updatePONData";
 import Page1 from "../components/Form/Page1";
 import Page2 from "../components/Form/Page2";
-import Header from "../components/Text/Header";
+import HeroHeader from "../components/Layout/HeroHeader";
 
 const defaultState = {
   status: 0,
@@ -52,7 +52,7 @@ const defaultErrorState2 = {
   // },
 };
 
-const myRequests = () => {
+const createRequest = () => {
   const [formData, setFormData] = useState(defaultState);
   const [errorState, setErrorState] = useState({
     ...defaultErrorState1,
@@ -207,7 +207,7 @@ const myRequests = () => {
 
   return (
     <div>
-      <Header title={"Create Request"} subtitle={"Create your requests here!"} />
+      <HeroHeader title={"Create Request"} subtitle={"Create your requests here!"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
         {activePage === 1 ? (
           <Page2
@@ -236,4 +236,4 @@ const myRequests = () => {
   );
 };
 
-export default myRequests;
+export default createRequest;
