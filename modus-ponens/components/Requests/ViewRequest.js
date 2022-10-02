@@ -146,7 +146,9 @@ export default function ViewRequest({ id }) {
           </div>
           <QRCode
             size={256}
-            value={id ? `localhost:3000/approval/aetos/${id}` : ""}
+            value={
+              id ? `https://modusponens.vmpsg.xyz/approval/aetos/${id}` : ""
+            }
           />
         </div>
       </QRModal>
