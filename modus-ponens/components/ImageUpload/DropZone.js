@@ -77,7 +77,7 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
           </div>
         </div> :
         <div>
-          <ItemImage src={`data:image/jpeg;base64,${image}`}/>
+          <ItemImage src={`data:image/png;base64,${image}`}/>
           <div className="mt-6">
             <Button
               onClick={open}

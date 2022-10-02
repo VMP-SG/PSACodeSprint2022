@@ -72,35 +72,33 @@ const RequestLeft = ({ data }) => {
 };
 
 const RequestRight = ({ data }) => {
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const [displayImage, setDisplayImage] = useState("");
   const [dropzoneStatus, setDropzoneStatus] = useState(1);
-  const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles) => {
 
     // add API request here
 
     acceptedFiles.map((file) => {
       const reader = new FileReader();
-      reader.onload = function (e) {
-        setImages((prevState) => [
-          ...prevState,
-          { id: Math.random(), src: e.target.result },
-        ]);
+      reader.onload = async function (e) {
+        const base64 = e.target.result;
+        const result = await objectDetect(base64);
+        const data = result.data;
+        const image = data.image;
+        const imagenobytes = image.substring(2, image.length-1);
+        setDisplayImage(`data:image/png;base64,${imagenobytes}`);
+        // setImages((prevState) => [
+        //   ...prevState,
+        //   { id: Math.random(), src: e.target.result },
+        // ]);
+
+        // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
+        
       };
       reader.readAsDataURL(file);
       return file;
     });
-
-    console.log(images);
-    // const base64 = images[images.length-1].src;
-    // console.log(base64);
-    // const result = await objectDetect(base64);
-    // const data = result.data;
-    // console.log(data.image);
-    // setDisplayImage(data.image);
-    // console.log(displayImage);
-
-    // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
 
   }, []);
 
