@@ -1,10 +1,10 @@
-import CategoryHeader from "./CategoryHeader";
+import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import InputField from "./InputField";
 
 const CompanyField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
-      <CategoryHeader>Company Details</CategoryHeader>
+      <TextFieldHeaders title="Company Details" />
       <InputField
         title={"Company"}
         name={"company"}
@@ -18,4 +18,4 @@ const CompanyField = ({ onChange, formData, errorState, isDisabled }) => {
   );
 };
 
-export default CompanyField
+export default CompanyField;

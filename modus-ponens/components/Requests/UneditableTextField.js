@@ -3,9 +3,10 @@ export default function UneditableTextField({
   type,
   placeholder,
   value,
+  className,
 }) {
   return (
-    <div className="flex flex-col my-5">
+    <div className={`flex flex-col my-5 ${className}`}>
       <label className="my-1 text-gray-500 text-sm font-semibold">
         {header}
       </label>

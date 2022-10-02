@@ -1,10 +1,15 @@
-import CategoryHeader from "./CategoryHeader";
+import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import InputField from "./InputField";
 
-const PurposeOfEntryField = ({ onChange, formData, errorState, isDisabled }) => {
+const PurposeOfEntryField = ({
+  onChange,
+  formData,
+  errorState,
+  isDisabled,
+}) => {
   return (
     <>
-      <CategoryHeader>Purpose of entry</CategoryHeader>
+      <TextFieldHeaders title="Purpose of Entry" />
       <InputField
         title={"Main Description"}
         name={"mainDescription"}

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import DashBoardHeader from "../Dashboard/DashboardHeader";
-import ComponentContainer from "../Container/ComponentContainer";
+import UneditableTextField from "../Requests/UneditableTextField";
+import TextFieldHeaders from "../Requests/TextFieldHeaders";
+import FormExterior from "../Requests/FormExterior";
 import FormHeader from "../Form/components/FormHeader";
 import getPONData from "../../api/getPONData";
 import CompanyField from "../Form/components/CompanyField";
@@ -37,27 +39,73 @@ const DOApproval = ({ user, id }) => {
     );
   };
 
-  return (
-    <div className="bg-light-blue-0 pb-24">
+  return formData?.mainDescription ? (
+    <div>
       {/* {console.log(formData)} */}
       <DashBoardHeader numItems={6} />
-      <ComponentContainer>
-        <div className="flex flex-col w-1/2">
-          <FormHeader>Approve Request</FormHeader>
-          <FormHeader>#{id}</FormHeader>
-          <CompanyField formData={formData} isDisabled={true} />
-          <RequestorField formData={formData} isDisabled={true} />
-          <PurposeOfEntryField formData={formData} isDisabled={true} />
-          <SpacedText styles={`flex justify-between`}>
-            <Link href={`/dashboard/${user}`}>
-              <BlueBorderedButton>Cancel</BlueBorderedButton>
-            </Link>
-            <RedButton onClick={handleDeny}>Deny</RedButton>
-            <GreenButton onClick={handleApprove}>Approve</GreenButton>
-          </SpacedText>
+      <div className="flex flex-col items-center justify-center bg-light-blue-0">
+        <div className="py-10">
+          <FormExterior>
+            <div className="font-bold text-3xl pb-10">
+              Approve Request #{id}
+            </div>
+            <div className="flex">
+              <div className="flex flex-col w-1/2">
+                <TextFieldHeaders title={"Company Details"} />
+                <UneditableTextField
+                  header={"Company"}
+                  type={"text"}
+                  value={formData.company}
+                  className="mr-5"
+                />
+                <TextFieldHeaders title={"Requestor Details"} />
+                <UneditableTextField
+                  header={"First Name"}
+                  type={"text"}
+                  value={formData.requestorFirstName}
+                />
+                <UneditableTextField
+                  header={"Last Name"}
+                  type={"text"}
+                  value={formData.requestorLastName}
+                />
+                <UneditableTextField
+                  header={"Identification Number"}
+                  type={"text"}
+                  value={formData.requestorID}
+                />
+                <TextFieldHeaders title={"Purpose of Entry"} />
+                <UneditableTextField
+                  header={"Main Description"}
+                  type={"text"}
+                  value={formData.mainDescription}
+                />
+                <UneditableTextField
+                  header={"Additional details"}
+                  type={"text"}
+                  value={formData.additionalDetails}
+                />
+                <SpacedText styles={`flex justify-between`}>
+                  <Link href={`/dashboard/${user}`}>
+                    <BlueBorderedButton>Cancel</BlueBorderedButton>
+                  </Link>
+                  <RedButton onClick={handleDeny}>Deny</RedButton>
+                  <GreenButton onClick={handleApprove}>Approve</GreenButton>
+                </SpacedText>
+              </div>
+              <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />
+            </div>
+          </FormExterior>
         </div>
-        <img src="/psa_1.jpg" className="object-cover w-1/2 flex" />
-      </ComponentContainer>
+      </div>
+    </div>
+  ) : (
+    <div className="py-10">
+      <FormExterior>
+        <div className="font-bold text-3xl pb-10">
+          Request #{id} was not found
+        </div>
+      </FormExterior>
     </div>
   );
 };

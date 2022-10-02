@@ -1,9 +1,8 @@
 import BlueButton from "../../Button/BlueButton";
-import CategoryHeader from "./CategoryHeader";
-import InputField from "./InputField";
-import QuantityField from "./Items/QuantityField";
+import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import SpacedText from "../../Text/SpacedText";
 import DropZone from "../../ImageUpload/DropZone";
+import UneditableTextField from "../../Requests/UneditableTextField";
 import { useCallback } from "react";
 
 const ItemField = ({
@@ -35,30 +34,23 @@ const ItemField = ({
   }, []);
 
   return (
-    <>
-      <CategoryHeader>Items to be declared</CategoryHeader>
-      {rows.map((idx) => {
+    <div className="mt-5">
+      <TextFieldHeaders title={"Items to be declared"} />
+      {Object.values(formData.items).map((item, index) => {
         return (
-          <div key={idx} className="grid grid-cols-2 mb-8 gap-12">
+          <div key={index} className="grid grid-cols-2 mb-8 gap-12">
             <div className="col-span-1">
-              <InputField
-                title={`Item ${idx} description*`}
-                name="description"
-                idx={idx - 1}
-                span={2}
-                onChange={(e) => onChange(e, idx - 1)}
-                formData={formData}
-                errorState={errorState}
-                isDisabled={isDisabled}
+              <UneditableTextField
+                header={`Item ${index + 1} Description`}
+                type={"text"}
+                value={item.description}
+                className="mr-5"
               />
-              <QuantityField
-                name="quantity"
-                span={2}
-                idx={idx - 1}
-                onChange={(e) => onChange(e, idx - 1)}
-                formData={formData}
-                errorState={errorState}
-                isDisabled={isDisabled}
+              <UneditableTextField
+                header={"Quantity"}
+                type={"text"}
+                value={item.quantity}
+                className="mr-5"
               />
             </div>
             <div className="col-span-1 flex flex-col justify-end">
@@ -67,10 +59,10 @@ const ItemField = ({
                 <DropZone
                   onDrop={onDrop}
                   accept={"image/*"}
-                  image={images ? images[idx - 1] : ""}
+                  image={images ? images[index - 1] : ""}
                 />
               )}
-              {isDisabled && <img src={formData.items[`item${idx - 1}`].image} />}
+              {isDisabled && <img src={item.image} />}
             </div>
           </div>
         );
@@ -85,7 +77,7 @@ const ItemField = ({
           </BlueButton>
         </SpacedText>
       )}
-    </>
+    </div>
   );
 };
 

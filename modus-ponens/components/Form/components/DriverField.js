@@ -1,15 +1,15 @@
-import CategoryHeader from "./CategoryHeader";
+import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import InputField from "./InputField";
 
 const DriverField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
-      <CategoryHeader>Driver Details</CategoryHeader>
+      <TextFieldHeaders title="Driver Details" />
       <div className="grid grid-cols-2">
         <InputField
           title={"First Name"}
           name={"driverFirstName"}
-          span={1}
+          span={"1 mr-2"}
           onChange={onChange}
           formData={formData}
           errorState={errorState}

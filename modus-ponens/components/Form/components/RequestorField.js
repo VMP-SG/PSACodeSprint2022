@@ -1,14 +1,14 @@
-import CategoryHeader from "./CategoryHeader";
+import TextFieldHeaders from "../../Requests/TextFieldHeaders";
 import InputField from "./InputField";
 
 const RequestorField = ({ onChange, formData, errorState, isDisabled }) => {
   return (
     <>
-      <CategoryHeader>Requestor Details</CategoryHeader>
+      <TextFieldHeaders title="Requestor Details" className="col-span-2" />
       <InputField
         title={"First Name"}
         name={"requestorFirstName"}
-        span={1}
+        span={"1 pr-2"}
         onChange={onChange}
         formData={formData}
         errorState={errorState}

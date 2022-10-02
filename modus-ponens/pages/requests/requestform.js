@@ -186,31 +186,32 @@ const RequestForm = () => {
   };
 
   return (
-    <div className="bg-light-blue-0 pb-24">
-      {console.log(formData)}
+    <div>
       <DashBoardHeader numItems={6} />
-      {activePage === 1 ? (
-        <Page2
-          formData={formData}
-          errorState={errorState}
-          handleChange={handleChange}
-          handleItems={handleItems}
-          togglePage={handleNext}
-          addAdditionalItems={addAdditionalItems}
-          handleSubmit={handleSubmit}
-          images={images}
-          setImages={setImages}
-          mouseOverHandler={mouseOverHandler}
-        />
-      ) : (
-        <Page1
-          formData={formData}
-          errorState={errorState}
-          handleChange={handleChange}
-          togglePage={handleNext}
-          mouseOverHandler={mouseOverHandler}
-        />
-      )}
+      <div className="flex flex-col items-center justify-center bg-light-blue-0">
+        {activePage === 1 ? (
+          <Page2
+            formData={formData}
+            errorState={errorState}
+            handleChange={handleChange}
+            handleItems={handleItems}
+            togglePage={handleNext}
+            addAdditionalItems={addAdditionalItems}
+            handleSubmit={handleSubmit}
+            images={images}
+            setImages={setImages}
+            mouseOverHandler={mouseOverHandler}
+          />
+        ) : (
+          <Page1
+            formData={formData}
+            errorState={errorState}
+            handleChange={handleChange}
+            togglePage={handleNext}
+            mouseOverHandler={mouseOverHandler}
+          />
+        )}
+      </div>
     </div>
   );
 };

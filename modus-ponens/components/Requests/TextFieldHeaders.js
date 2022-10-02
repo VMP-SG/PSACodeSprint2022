@@ -1,3 +1,3 @@
-export default function TextFieldHeaders({ title }) {
-  return <div className="font-semibold text-xl">{title}</div>;
+export default function TextFieldHeaders({ title, className }) {
+  return <div className={`font-semibold text-xl ${className}`}>{title}</div>;
 }
