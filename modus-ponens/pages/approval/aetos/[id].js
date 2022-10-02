@@ -10,7 +10,7 @@ export default function RequestPage() {
     <div>
       <HeroHeader title={"Approve Request"} />
       <div className="flex flex-col items-center justify-center bg-light-blue-0">
-        <AETOSApproval id={id} user="placeholder" />
+        <AETOSApproval id={id} />
       </div>
     </div>
   );

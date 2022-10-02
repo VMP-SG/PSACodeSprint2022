@@ -77,10 +77,14 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
           )}
           <div className="mt-6">
             <Button
-              onClick={open}
-              styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
+              onClick={status === 1 ? open : null}
+              styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button`}
             >
-              {status === 1 ? "Open Cross-Reference Image" : status === 2 ? "Rejected" : "Cross-Checked"}
+              {status === 1
+                ? "Open Cross-Reference Image"
+                : status === 2
+                ? "Rejected"
+                : "Cross-Checked"}
             </Button>
           </div>
         </div>
@@ -90,10 +94,14 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
             <ItemImage src={image} />
             <div className="mt-6">
               <Button
-                onClick={open}
-                styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
+                onClick={status === 1 ? open : null}
+                styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button`}
               >
-                Open Cross-Reference Image
+                {status === 1
+                  ? "Open Cross-Reference Image"
+                  : status === 2
+                  ? "Rejected"
+                  : "Cross-Checked"}
               </Button>
             </div>
           </div>
