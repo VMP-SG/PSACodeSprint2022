@@ -15,6 +15,8 @@ import GreenButton from "../Button/GreenButton";
 import DropZone from "../ImageUpload/DropZone";
 import objectDetect from "../../api/objectDetect";
 
+const THRESHOLD = 0.1;
+
 const RequestLeft = ({ data }) => {
   return (
     <div className="w-full px-5">
@@ -76,17 +78,33 @@ const RequestRight = ({ data }) => {
   const [displayImage, setDisplayImage] = useState("");
   const [dropzoneStatus, setDropzoneStatus] = useState(1);
   const onDrop = useCallback((acceptedFiles) => {
-
     // add API request here
 
-    acceptedFiles.map((file) => {
+    acceptedFiles.map((file, index) => {
       const reader = new FileReader();
       reader.onload = async function (e) {
         const base64 = e.target.result;
         const result = await objectDetect(base64);
-        const data = result.data;
-        const image = data.image;
-        const imagenobytes = image.substring(2, image.length-1);
+        const newData = result.data;
+        const image = newData.image;
+        const imagenobytes = image.substring(2, image.length - 1);
+        const itemObj = newData.item_dict;
+        const initialItemObj = data.cvInitial[`item${index}`].item_dict;
+        var totalObjects = Object.values(
+          initialItemObj
+        ).reduce((partialSum, a) => partialSum + a, 0);
+        var sum = 0;
+        console.log("itemObj", itemObj)
+        for (var key of Object.keys(initialItemObj)) {
+          // console.log(key)
+          // console.log("initialItemObj[key]", initialItemObj[key])
+          // console.log("itemObj?.key", itemObj?.key)
+          var num = key in itemObj ? itemObj[key] : 0;
+          console.log("num", num)
+          sum += Math.min(initialItemObj[key], num)
+        }
+        console.log("sum", sum)
+        setDropzoneStatus(sum/totalObjects < THRESHOLD ? 2 : 3)
         setDisplayImage(`data:image/png;base64,${imagenobytes}`);
         // setImages((prevState) => [
         //   ...prevState,
@@ -94,12 +112,10 @@ const RequestRight = ({ data }) => {
         // ]);
 
         // setDropzoneStatus() // change this to 1 for blue, 2 for red, 3 for green
-
       };
       reader.readAsDataURL(file);
       return file;
     });
-
   }, []);
 
   return (
@@ -125,7 +141,6 @@ const RequestRight = ({ data }) => {
               thumbnail={item.image}
               status={dropzoneStatus} // status 1 == blue (yet to receive image), status 2 == red (denied), status 3 == blue (accepted)
             />
-            {/* <ItemImage src={item.image} /> */}
           </>
         );
       })}

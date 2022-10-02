@@ -29,7 +29,7 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
             <Ctext styles={"flex justify-center items-center text-subtitle text-blue-link font-semibold cursor-pointer h-full"}>
               Drag image to upload
               <div className="px-2 flex items-center">
-                <Image src={Upload} className="px-2"/>
+                <Image src={Upload} className="px-2" />
               </div>
             </Ctext>
           )}
@@ -72,7 +72,7 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
               onClick={open}
               styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
             >
-              Open Cross-Reference Image
+              {status === 1 ? "Open Cross-Reference Image" : status === 2 ? "Rejected" : "Cross-Checked"}
             </Button>
           </div>
         </div> : thumbnail &&
@@ -83,7 +83,7 @@ function DropZone({ onDrop, accept, open, image, thumbnail, status }) {
               onClick={open}
               styles={`px-5 py-3 bg-${dropzoneColour} text-white primary-button cursor-pointer`}
             >
-              Open Cross-Reference Image
+              {status === 1 ? "Open Cross-Reference Image" : status === 2 ? "Rejected" : "Cross-Checked"}
             </Button>
           </div>
         </div>
